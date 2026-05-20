@@ -9,7 +9,7 @@ import type { CardProps } from "./Card.types.ts";
 import { Box, Stack } from '@mui/material';
 import { useState } from 'react';
 import { PadraoModal } from '../Modal/Modal.tsx';
-import { useNavigate as useNavigate } from "react-router-dom";
+// import { useNavigate as useNavigate } from "react-router-dom";
 import Link from '@mui/joy/Link';
 import { Person } from '@mui/icons-material';
 
@@ -23,7 +23,7 @@ export default function ProductCard({
     preco,
     tipoCard,
 }: CardProps) {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     // const { handleAdd, modalMessage, modalOpen, setModalOpen } = useAddCarrinho();
 
@@ -34,9 +34,9 @@ export default function ProductCard({
     //     });
     // };
 
-    const handleEdit = () => {
-        navigate(`/EditarProdutoPage/${id}`);
-    };
+    // const handleEdit = () => {
+    //     navigate(`/EditarProdutoPage/${id}`);
+    // };
 
     const [openModal, setOpenModal] = useState(false);
     // const deleteMutation = useDeleteProduto();
@@ -62,7 +62,7 @@ export default function ProductCard({
                             espacamento={70}
                             tamanho="sm"
                             sx={{ border: '1px solid', borderColor: 'grey.300' }}
-                            onClick={() => navigate(`/PerfilProdutor/${id}`)}
+                            onClick={() => {} }
                         >
                             Ver produtos
                         </Button>
@@ -71,7 +71,7 @@ export default function ProductCard({
             case "Produtor":
                 return (
                     <Box className="center" sx={{ gap: 1 }}>
-                        <Button onClick={handleEdit} variante="ButtonGreen" espacamento={60} tamanho="md" icon={Pencil}>
+                        <Button onClick={()=> {}} variante="ButtonGreen" espacamento={60} tamanho="md" icon={Pencil}>
                             Editar
                         </Button>
                         <Button
