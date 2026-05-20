@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
 import { Box, Typography } from "@mui/material";
 import { useController, type Control, type FieldValues, type Path } from "react-hook-form";
 
@@ -16,7 +16,7 @@ export function InputImagem<FormType extends FieldValues>({
     name,
     label,
     control,
-    defaultImage,
+    // defaultImage,
     readOnly,
     width = 43,
     height = 31.563,
@@ -28,19 +28,19 @@ export function InputImagem<FormType extends FieldValues>({
         defaultValue: undefined, // form recebe File | undefined
     });
 
-    const [preview, setPreview] = useState<string | null>(defaultImage || null);
+    // const [preview, setPreview] = useState<string | null>(defaultImage || null);
 
-    useEffect(() => {
-    if (field.value && typeof field.value === "object" && "name" in field.value && "size" in field.value) {
-        // é um File
-        setPreview(URL.createObjectURL(field.value as File));
-    } else if (typeof field.value === "string") {
-        // é uma URL
-        setPreview(field.value);
-    } else {
-        setPreview(defaultImage ?? null);
-    }
-}, [field.value, defaultImage]);
+//     useEffect(() => {
+//     if (field.value && typeof field.value === "object" && "name" in field.value && "size" in field.value) {
+//         // é um File
+//         setPreview(URL.createObjectURL(field.value as File));
+//     } else if (typeof field.value === "string") {
+//         // é uma URL
+//         setPreview(field.value);
+//     } else {
+//         setPreview(defaultImage ?? null);
+//     }
+// }, [field.value, defaultImage]);
 
 
     const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -91,8 +91,8 @@ export function InputImagem<FormType extends FieldValues>({
                         type="file"
                         accept="image/*"
                         hidden
-                        name={field.name}
-                        ref={field.ref}
+                        // name={field.name}
+                        // ref={field.ref}
                         onChange={handleImageChange}
                     />
                 )}
