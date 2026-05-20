@@ -1,0 +1,1 @@
+export { default as LogoCultiva } from "./hero.png";
