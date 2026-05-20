@@ -25,32 +25,32 @@ export default function ProductCard({
 }: CardProps) {
     const navigate = useNavigate();
 
-    const { handleAdd, modalMessage, modalOpen, setModalOpen } = useAddCarrinho();
+    // const { handleAdd, modalMessage, modalOpen, setModalOpen } = useAddCarrinho();
 
-    const handleAdicionarCarrinho = () => {
-        handleAdd({
-            produto_id: id,
-            quantidade: 1,
-        });
-    };
+    // const handleAdicionarCarrinho = () => {
+    //     handleAdd({
+    //         produto_id: id,
+    //         quantidade: 1,
+    //     });
+    // };
 
     const handleEdit = () => {
         navigate(`/EditarProdutoPage/${id}`);
     };
 
     const [openModal, setOpenModal] = useState(false);
-    const deleteMutation = useDeleteProduto();
+    // const deleteMutation = useDeleteProduto();
 
-    function handleDelete() {
-        deleteMutation.mutate(id, {
-            onSuccess: () => {
-                setOpenModal(true);
-            },
-            onError: () => {
-                setOpenModal(true);
-            }
-        });
-    }
+    // function handleDelete() {
+    //     deleteMutation.mutate(id, {
+    //         onSuccess: () => {
+    //             setOpenModal(true);
+    //         },
+    //         onError: () => {
+    //             setOpenModal(true);
+    //         }
+    //     });
+    // }
 
     const renderByType = () => {
         switch (tipoCard) {
@@ -78,7 +78,7 @@ export default function ProductCard({
                             variante="ButtonLinkRed"
                             icon={Trash2}
                             tamanho="xl"
-                            onClick={handleDelete}
+                            // onClick={handleDelete}
                         />
                     </Box>
                 );
@@ -90,7 +90,7 @@ export default function ProductCard({
                             espacamento={70}
                             tamanho="md"
                             icon={ShoppingCart}
-                            onClick={handleAdicionarCarrinho}
+                            // onClick={handleAdicionarCarrinho}
                         >
                             Adicionar
                         </Button>
@@ -204,15 +204,15 @@ export default function ProductCard({
                 color="#dc2626"
             />
 
-            <PadraoModal
-                open={modalOpen}
+            {/* <PadraoModal
+                open={setModalOpen}
                 onClose={() => setModalOpen(false)}
                 title="Carrinho"
-                description={modalMessage ?? ""}
+                // description={modalMessage ?? ""}
                 buttonText="Concluir"
                 to="/HomeConsumidor"
                 Icon={CheckCircle}
-            />
+            /> */}
         </>
     );
 }
