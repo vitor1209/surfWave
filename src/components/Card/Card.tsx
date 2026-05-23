@@ -22,6 +22,7 @@ export default function ProductCard({
     validade,
     preco,
     tipoCard,
+    onReserve,
 }: CardProps) {
     // const navigate = useNavigate();
 
@@ -52,6 +53,8 @@ export default function ProductCard({
     //     });
     // }
 
+    const isProductCard = tipoCard === "Produto" || tipoCard === "semLogin";
+
     const renderByType = () => {
         switch (tipoCard) {
             case "Horta":
@@ -71,7 +74,7 @@ export default function ProductCard({
             case "Produtor":
                 return (
                     <Box className="center" sx={{ gap: 1 }}>
-                        <Button onClick={()=> {}} variante="ButtonGreen" espacamento={60} tamanho="md" icon={Pencil}>
+                        <Button onClick={()=> {}} variante="ButtonBlue" espacamento={60} tamanho="md" icon={Pencil}>
                             Editar
                         </Button>
                         <Button
@@ -86,13 +89,13 @@ export default function ProductCard({
                 return (
                     <Box className="center">
                         <Button
-                            variante="ButtonGreen"
-                            espacamento={70}
+                            variante="ButtonBlue"
+                            espacamento={0}
                             tamanho="md"
                             icon={ShoppingCart}
-                            // onClick={handleAdicionarCarrinho}
+                            onClick={() => onReserve?.(String(id))}
                         >
-                            Adicionar
+                            Reservar
                         </Button>
                     </Box>
                 );
@@ -101,13 +104,13 @@ export default function ProductCard({
                 return (
                     <Box className="center">
                         <Button
-                            variante="ButtonGreen"
-                            espacamento={70}
+                            variante="ButtonBlue"
+                            espacamento={30}
                             tamanho="md"
                             icon={ShoppingCart}
                             to='/Login'
                         >
-                            Adicionar
+                            Reservar
                         </Button>
                     </Box>
                 );
@@ -116,82 +119,137 @@ export default function ProductCard({
         }
     };
 
+    const formattedPrice =
+        typeof preco === "number" ? preco.toFixed(0) : preco;
+
     return (
         <>
-
             <Styled.ProductCardStyled tipoCard={tipoCard}>
-                <CardOverflow sx={{ height: '50%', width: '100%' }}>
+                <CardOverflow className="cardMedia">
                     <Stack sx={{ height: "100%", width: "100%" }}>
                         <img
                             src={image}
                             alt=""
                             loading="lazy"
                             style={{
-                                width: '100%',
-                                height: '100%',
-                                objectFit: 'cover',
+                                width: "100%",
+                                height: "100%",
+                                objectFit: "cover",
                             }}
                         />
                     </Stack>
                 </CardOverflow>
 
-                <CardContent className="cardContainer">
-                    <div className="inline-item">
+                {isProductCard ? (
+                    <CardContent className="productContent">
+                        <Typography className="productTag" level="body-xs">
+                            {String(lugar).toUpperCase()}
+                        </Typography>
+
                         <Link
+                            className="productTitle"
                             href={
-                                tipoCard === "semLogin" ? "/Login" :
-                                    tipoCard === "Produto" ? `/Produto/${id}` :
-                                        undefined
+                                tipoCard === "semLogin"
+                                    ? "/Login"
+                                    : `/Produto/${id}`
                             }
                             color="neutral"
                             underline="none"
-                            onClick={e => {
-                                if (tipoCard === "Horta") e.preventDefault();
-                            }}
                         >
                             {name}
                         </Link>
-                    </div>
 
-                    <div>
-                        <div className="inline-item">
-                            <Typography startDecorator={<Person height={18} />} level="body-sm">
-                                {lugar}
-                            </Typography>
-                        </div>
-                    </div>
-
-                    {descricao && (
-                        <div className="inline-item">
-                            <Typography sx={{
-                                textAlign: 'start',
-                                whiteSpace: 'wrap',
-                                overflow: 'hidden',
-                                textOverflow: 'ellipsis',
-                            }} level="body-sm">
+                        {descricao && (
+                            <Typography className="productDescription" level="body-sm">
                                 {descricao}
                             </Typography>
-                        </div>
-                    )}
+                        )}
 
-                    {validade && (
-                        <div className="inline-item">
-                            <Typography level="body-xs" sx={{ opacity: 0.7 }}>
-                                Validade: {validade}
+                        <div className="productFooter">
+                            <Typography className="productPrice" level="title-lg">
+                                R${formattedPrice}
+                                <span>/dia</span>
                             </Typography>
-                        </div>
-                    )}
 
-                    {(tipoCard === "Produto" || tipoCard === "Produtor") && (
+                            <Button
+                                variante="ButtonBlue"
+                                espacamento={30}
+                                tamanho="md"
+                                onClick={
+                                    tipoCard === "Produto"
+                                        ? () => onReserve?.(String(id))
+                                        : undefined
+                                }
+                                to={tipoCard === "semLogin" ? "/Login" : undefined}
+                            >
+                                Reservar
+                            </Button>
+                        </div>
+                    </CardContent>
+                ) : (
+                    <CardContent className="cardContainer">
                         <div className="inline-item">
-                            <Chip size="lg" color="success">
-                                R${preco}
-                            </Chip>
+                            <Link
+                                href={
+                                    tipoCard === "Produtor"
+                                        ? "/Login"
+                                        : tipoCard === "Horta"
+                                            ? `/Horta/${id}`
+                                            : undefined
+                                }
+                                color="neutral"
+                                underline="none"
+                                onClick={e => {
+                                    if (tipoCard === "Horta") e.preventDefault();
+                                }}
+                            >
+                                {name}
+                            </Link>
                         </div>
-                    )}
-                </CardContent>
 
-                {renderByType()}
+                        <div>
+                            <div className="inline-item">
+                                <Typography startDecorator={<Person height={18} />} level="body-sm">
+                                    {lugar}
+                                </Typography>
+                            </div>
+                        </div>
+
+                        {descricao && (
+                            <div className="inline-item">
+                                <Typography
+                                    sx={{
+                                        textAlign: "start",
+                                        whiteSpace: "wrap",
+                                        overflow: "hidden",
+                                        textOverflow: "ellipsis",
+                                    }}
+                                    level="body-sm"
+                                >
+                                    {descricao}
+                                </Typography>
+                            </div>
+                        )}
+
+                        {validade && (
+                            <div className="inline-item">
+                                <Typography level="body-xs" sx={{ opacity: 0.7 }}>
+                                    Validade: {validade}
+                                </Typography>
+                            </div>
+                        )}
+
+                        {(tipoCard === "Horta" || tipoCard === "Produtor") && (
+                            <div className="inline-item">
+                                <Chip size="lg" color="success">
+                                    R${preco}
+                                </Chip>
+                            </div>
+                        )}
+                    </CardContent>
+                )}
+
+                {!isProductCard && renderByType()}
             </Styled.ProductCardStyled>
             <PadraoModal
                 open={openModal}

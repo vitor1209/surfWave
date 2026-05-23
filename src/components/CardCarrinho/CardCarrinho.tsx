@@ -10,11 +10,9 @@ import {
 } from "./CardCarrinho.styled";
 import { QuantidadeSelector } from "../selectQuant/QuantidadeSelector";
 import type { ProductCardComponentProps } from "./CardCarrinho.types";
-import { useDelCarrinho } from "../../pages/carrinho/carrinho.hook";
 import { PadraoModal } from "../Modal/Modal";
 
 export default function ProductCardComponent({
-    id,
     title,
     farm,
     price,
@@ -23,11 +21,6 @@ export default function ProductCardComponent({
     onIncrease,
     onDecrease,
 }: ProductCardComponentProps) {
-    const { handleDel, modalMessageDel, modalOpenDel, setModalOpenDel } = useDelCarrinho();
-
-    const handleDeleteCarrinho = () => {
-        handleDel(id);
-    };
 
     return (
         <>
@@ -53,7 +46,7 @@ export default function ProductCardComponent({
                 </Stack>
 
                 <Stack sx={{ display: "flex", gap: 1, alignItems: { sm: "center", md: "flex-end" } }}>
-                    <TrashButton onClick={handleDeleteCarrinho}>
+                    <TrashButton onClick={() => { }}>
                         <Trash2 />
                     </TrashButton>
 
@@ -71,10 +64,10 @@ export default function ProductCardComponent({
             </ProductCard>
 
             <PadraoModal
-                open={modalOpenDel}
-                onClose={() => setModalOpenDel(false)}
+                open={false}
+                onClose={() => { }}
                 title="Item removido!"
-                description={modalMessageDel ?? ""}
+                description={""}
                 buttonText="Concluir"
                 color="#dc2626"
                 to="/FinalizarCarrinho"

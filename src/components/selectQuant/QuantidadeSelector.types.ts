@@ -1,6 +1,6 @@
 export type QuantidadeSelectorProps = {
   txt: string | null
   quantidade: number
-  onIncrease: () => void
-  onDecrease: () => void
+  onIncrease?: () => void
+  onDecrease:(id: string) => void
 }
