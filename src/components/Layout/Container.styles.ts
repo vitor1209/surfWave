@@ -1,4 +1,4 @@
-import { SxProps, Theme } from "@mui/material"
+import type { SxProps, Theme } from "@mui/material"
 
 export const headerSx: SxProps<Theme> = {
   position: "relative",
@@ -88,6 +88,18 @@ export const contentAreaSx: SxProps<Theme> = {
     sm: 4,
     md: 6,
   },
+}
+
+export const headerBrandSx: SxProps<Theme> = {
+  fontSize: { xs: "24px", sm: "28px", md: "32px" },
+  fontWeight: 700,
+  color: "#fff",
+  letterSpacing: "-0.5px",
+  background: "#fff",
+  WebkitBackgroundClip: "text",
+  WebkitTextFillColor: "transparent",
+  backgroundClip: "text",
+  mb: 0.5,
 }
 
 export const globalStyles = `

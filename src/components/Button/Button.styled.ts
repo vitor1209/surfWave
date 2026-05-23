@@ -8,7 +8,7 @@ export const ButtonVariants = styled(ButtonBase, {
     variante:
         | "ButtonGreen"
         | "ButtonLinkBlack"
-        | "ButtonLinkGreen"
+        | "ButtonLinkWhite"
         | "ButtonOrange"
         | "ButtonRed"
         | "ButtonLinkRed"
@@ -56,9 +56,9 @@ export const ButtonVariants = styled(ButtonBase, {
             color: "Black",
             "&:hover": { opacity: 0.5 },
         }),
-        ...(variante === "ButtonLinkGreen" && {
+        ...(variante === "ButtonLinkWhite" && {
             background: "transparent",
-            color: "#00A63E",
+            color: "#FFFFFF",
             "&:hover": { opacity: 0.5 },
         }),
 

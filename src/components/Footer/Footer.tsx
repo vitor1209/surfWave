@@ -1,5 +1,4 @@
 import { Box } from "@mui/material"
-import { motion } from "framer-motion"
 import {
   footerRootSx,
   footerContentSx,
@@ -16,31 +15,6 @@ import {
   footerDividerSx,
   footerCopyrightSx,
 } from "@/components/Footer/Footer.styles"
-
-const MotionBox = motion(Box)
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2,
-    },
-  },
-}
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      ease: "easeOut",
-    },
-  },
-}
 
 export const Footer = () => {
   const navigationLinks = [
@@ -64,17 +38,11 @@ export const Footer = () => {
 
   return (
     <Box component="footer" sx={footerRootSx}>
-      <MotionBox
-        sx={footerContentSx}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={containerVariants}
-      >
+      <Box sx={footerContentSx}>
         {/* Main Grid Content */}
         <Box sx={footerGridSx}>
           {/* Left Column - Brand */}
-          <MotionBox sx={footerSectionSx} variants={itemVariants}>
+          <Box sx={footerSectionSx}>
             <Box sx={footerBrandSx}>SurfWave</Box>
             <Box sx={footerDescriptionSx}>
               Transformando sonhos em realidade nas ondas desde 2010. Venha
@@ -83,25 +51,23 @@ export const Footer = () => {
 
             {/* Social Icons */}
             <Box sx={socialIconsSx}>
-              {socialLinks.map((social, index) => (
-                <motion.a
+              {socialLinks.map((social) => (
+                <a
                   key={social.name}
                   href={social.url}
                   aria-label={social.name}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{
-                    delay: index * 0.1,
-                    type: "spring",
-                    stiffness: 260,
-                    damping: 20,
-                  }}
+                  style={{ textDecoration: "none" }}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   <Box
                     component="div"
-                    sx={socialButtonSx}
+                    sx={{
+                      ...socialButtonSx,
+                      transition: "transform 150ms ease, opacity 200ms ease",
+                      '&:hover': { transform: 'scale(1.08)' },
+                      '&:active': { transform: 'scale(0.95)' },
+                    }}
                     role="button"
                     tabIndex={0}
                     onKeyDown={(e) => {
@@ -112,28 +78,33 @@ export const Footer = () => {
                   >
                     {social.icon}
                   </Box>
-                </motion.a>
+                </a>
               ))}
             </Box>
-          </MotionBox>
+          </Box>
 
           {/* Center Column - Navigation */}
-          <MotionBox sx={footerSectionSx} variants={itemVariants}>
+          <Box sx={footerSectionSx}>
             <Box sx={footerTitleSx}>Navegação</Box>
             {navigationLinks.map((link) => (
-              <motion.a
+              <Box
+                component="a"
                 key={link.label}
                 href={link.href}
-                whileHover={{ x: 4 }}
-                transition={{ duration: 0.2 }}
+                sx={{
+                  ...footerLinkSx,
+                  display: 'block',
+                  transition: 'transform 200ms ease',
+                  '&:hover': { transform: 'translateX(4px)' },
+                }}
               >
-                <Box sx={footerLinkSx}>{link.label}</Box>
-              </motion.a>
+                {link.label}
+              </Box>
             ))}
-          </MotionBox>
+          </Box>
 
           {/* Right Column - Contact */}
-          <MotionBox sx={footerSectionSx} variants={itemVariants}>
+          <Box sx={footerSectionSx}>
             <Box sx={footerTitleSx}>Contato</Box>
 
             <Box sx={footerContactItemSx}>
@@ -143,68 +114,50 @@ export const Footer = () => {
 
             <Box sx={footerContactItemSx}>
               <Box sx={footerContactIconSx}>✉️</Box>
-              <motion.a
+              <Box
+                component="a"
                 href={`mailto:${contactInfo.email}`}
-                whileHover={{ x: 4 }}
+                sx={{
+                  color: "rgba(0, 0, 0, 0.65)",
+                  textDecoration: "none",
+                  cursor: "pointer",
+                  transition: "color 0.3s, transform 120ms ease",
+                  '&:hover': { color: 'rgba(0, 0, 0, 0.85)', transform: 'translateX(4px)' },
+                }}
               >
-                <Box
-                  sx={{
-                    color: "rgba(0, 0, 0, 0.65)",
-                    textDecoration: "none",
-                    cursor: "pointer",
-                    transition: "color 0.3s",
-                    "&:hover": {
-                      color: "rgba(0, 0, 0, 0.85)",
-                    },
-                  }}
-                >
-                  {contactInfo.email}
-                </Box>
-              </motion.a>
+                {contactInfo.email}
+              </Box>
             </Box>
 
             <Box sx={footerContactItemSx}>
               <Box sx={footerContactIconSx}>☎️</Box>
-              <motion.a href={`tel:${contactInfo.phone}`} whileHover={{ x: 4 }}>
-                <Box
-                  sx={{
-                    color: "rgba(0, 0, 0, 0.65)",
-                    textDecoration: "none",
-                    cursor: "pointer",
-                    transition: "color 0.3s",
-                    "&:hover": {
-                      color: "rgba(0, 0, 0, 0.85)",
-                    },
-                  }}
-                >
-                  {contactInfo.phone}
-                </Box>
-              </motion.a>
+              <Box
+                component="a"
+                href={`tel:${contactInfo.phone}`}
+                sx={{
+                  color: "rgba(0, 0, 0, 0.65)",
+                  textDecoration: "none",
+                  cursor: "pointer",
+                  transition: "color 0.3s, transform 120ms ease",
+                  '&:hover': { color: 'rgba(0, 0, 0, 0.85)', transform: 'translateX(4px)' },
+                }}
+              >
+                {contactInfo.phone}
+              </Box>
             </Box>
-          </MotionBox>
+          </Box>
         </Box>
-      </MotionBox>
+      </Box>
 
       {/* Divider */}
-      <MotionBox
-        sx={footerDividerSx}
-        initial={{ scaleX: 0 }}
-        whileInView={{ scaleX: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8, delay: 0.3 }}
-      />
+      <Box sx={footerDividerSx} />
 
       {/* Copyright */}
-      <MotionBox
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: 0.5 }}
-      >
+      <Box>
         <Box sx={footerCopyrightSx}>
           © 2026 WaveSurf. Todos os direitos reservados.
         </Box>
-      </MotionBox>
+      </Box>
     </Box>
   )
 }

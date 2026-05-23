@@ -9,6 +9,6 @@ export const HeaderContainer = styled(AppBar)(() => ({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    backgroundColor: "#FFF",
-    color: "#0A0A0A",
+    backgroundColor: "#5491ED",
+    color: "#86B2F3",
 }))
