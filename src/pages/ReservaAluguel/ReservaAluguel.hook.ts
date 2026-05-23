@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom"
 
-import { allEquipment } from "../Aluguel/Aluguel.hook"
-import type { UseReservaAluguelReturn } from "./ReservaAluguel.types"
+import { allEquipment } from "@/pages/Aluguel/Aluguel.hook"
+import type { UseReservaAluguelReturn } from "@/pages/ReservaAluguel/ReservaAluguel.types"
 
 export const useReservaAluguel = (): UseReservaAluguelReturn => {
   const navigate = useNavigate()
@@ -14,17 +14,8 @@ export const useReservaAluguel = (): UseReservaAluguelReturn => {
     navigate("/aluguel")
   }
 
-  const handleReserve = () => {
-    if (!equipment) {
-      return
-    }
-
-    alert(`Reserva de "${equipment.name}" realizada com sucesso!`)
-  }
-
   return {
     equipment,
     handleBack,
-    handleReserve,
   }
 }
