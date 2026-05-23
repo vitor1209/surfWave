@@ -1,6 +1,5 @@
 import { HeaderContainer } from "./Header.styled.ts";
 import Stack from '@mui/material/Stack';
-import { LogoCultiva } from "../../assets/index";
 import { Box, Drawer, IconButton, useMediaQuery, useTheme } from "@mui/material";
 import { MenuIcon } from "lucide-react";
 import { useState } from "react";
@@ -17,15 +16,13 @@ export const Header: React.FC<HeaderProps> = ({ children, end, start }) => {
     const navButtons = (
         <Stack sx={{ display: "flex", alignItems: "center", flexDirection: "column", gap: 2, p: 2 }}>
             {children}
-            <>{end}</>
+            {end && <>{end}</>}
         </Stack>)
 
 
     return (
         <HeaderContainer className="BlueHeader">
-            <Stack sx={{ display: "flex" }}>
-                <img src={LogoCultiva} alt="Logo Cultiva" width={120} />
-            </Stack>
+       
             {isMobile ? (
                 <>
                     <IconButton onClick={toggleDrawer}>
@@ -53,7 +50,7 @@ export const Header: React.FC<HeaderProps> = ({ children, end, start }) => {
                     <Stack sx={{ display: "flex", flexDirection: "row", gap: 2, alignItems: "center" }}>
                         {children}
                     </Stack>
-                    <>{end}</>
+                    {end && <>{end}</>}
                 </>
             )}
         </HeaderContainer>)

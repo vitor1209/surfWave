@@ -1,6 +1,7 @@
 import { Box, Stack } from "@mui/material"
-import { motion } from "framer-motion"
+import { motion, type Variants } from "framer-motion"
 import { useContainer } from "@/components/Layout/Container.hook"
+import { Footer } from "@/components/Footer"
 import {
   headerSx,
   headerContentSx,
@@ -8,17 +9,20 @@ import {
   subtitleSx,
   waveContainerSx,
   contentAreaSx,
+  headerBrandSx,
 } from "@/components/Layout/Container.styles"
 import type { ContainerProps } from "@/components/Layout/Container.types"
+import { Header } from "../Header/Header"
+import { Button } from "../Button/Button"
 
 const MotionBox = motion(Box)
+const MotionSvg = motion.svg
 
 const Wave = ({ delay, duration }: { delay: number; duration: number }) => (
-  <MotionBox
-    component="svg"
+  <MotionSvg
     viewBox="0 0 1200 120"
     preserveAspectRatio="none"
-    sx={{
+    style={{
       position: "absolute",
       bottom: 0,
       left: 0,
@@ -37,13 +41,13 @@ const Wave = ({ delay, duration }: { delay: number; duration: number }) => (
     }}
   >
     <path d="M0,50 Q300,0 600,50 T1200,50 L1200,120 L0,120 Z" />
-  </MotionBox>
+  </MotionSvg>
 )
 
 export const Container = ({ title, subtitle, children }: ContainerProps) => {
   useContainer()
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -54,8 +58,11 @@ export const Container = ({ title, subtitle, children }: ContainerProps) => {
     },
   }
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+  const itemVariants: Variants = {
+    hidden: {
+      opacity: 0,
+      y: 20,
+    },
     visible: {
       opacity: 1,
       y: 0,
@@ -68,13 +75,27 @@ export const Container = ({ title, subtitle, children }: ContainerProps) => {
 
   return (
     <Stack
-      component="main"
       sx={{
-        height: "100vh",
-        overflow: "hidden",
+        minHeight: "100vh",
         flexDirection: "column",
       }}
     >
+
+      <Header
+        start={
+          <Stack direction="row" spacing={3}>
+            <Box sx={headerBrandSx}>SurfWave</Box>
+          </Stack>
+        }
+      >
+        <>
+          <Button variante="ButtonLinkWhite" tamanho="sm" to="/HomeConsumidor">Início</Button>
+          <Button variante="ButtonLinkWhite" tamanho="sm">Produtos</Button>
+
+          <Button variante="ButtonLinkWhite" tamanho="sm">Produtores</Button>
+          <Button variante="ButtonLinkWhite" to="/Sobre" tamanho="sm">Sobre</Button>
+        </>
+      </Header>
       {/* Header Section */}
       <Box component="header" sx={headerSx}>
         <MotionBox
@@ -120,19 +141,23 @@ export const Container = ({ title, subtitle, children }: ContainerProps) => {
       </Box>
 
       {/* Content Section */}
-      <MotionBox
-        component="section"
-        sx={contentAreaSx}
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-      >
-        <motion.div variants={itemVariants}>
-          <Box sx={{ width: "100%", height: "100%" }}>
-            {children}
-          </Box>
+      <Box component="section" sx={contentAreaSx}>
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={containerVariants}
+          style={{ width: "100%", height: "100%" }}
+        >
+          <motion.div variants={itemVariants}>
+            <Box sx={{ width: "100%", height: "100%" }}>
+              {children}
+            </Box>
+          </motion.div>
         </motion.div>
-      </MotionBox>
+      </Box>
+
+      {/* Footer */}
+      <Footer />
     </Stack>
   )
 }

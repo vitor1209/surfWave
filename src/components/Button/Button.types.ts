@@ -5,7 +5,7 @@ export interface ButtonProp extends ButtonBaseProps {
     variante?:
         | "ButtonGreen"
         | "ButtonLinkBlack"
-        | "ButtonLinkGreen"
+        | "ButtonLinkWhite"
         | "ButtonOrange"
         | "ButtonRed"
         | "ButtonLinkRed"
