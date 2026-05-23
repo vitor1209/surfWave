@@ -1,3 +1,4 @@
+import { useState } from "react"
 import {
   Box,
   Card,
@@ -6,16 +7,22 @@ import {
 } from "@mui/material"
 
 import { Check, Info } from "lucide-react"
-import { Button } from "../../components/Button/Button"
 
-import { useReservaAluguel } from "./ReservaAluguel.hook"
+import { Button } from "@/components/Button/Button"
+import { ReservaWizard } from "@/pages/ReservaAluguel/modals/ReservaWizard/ReservaWizard"
+import { useReservaAluguel } from "@/pages/ReservaAluguel/ReservaAluguel.hook"
 
 export const ReservaAluguel = () => {
   const {
     equipment,
     handleBack,
-    handleReserve,
   } = useReservaAluguel()
+
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true)
+  }
 
   if (!equipment) {
     return (
@@ -247,7 +254,7 @@ export const ReservaAluguel = () => {
         </Button>
 
         <Button
-          onClick={handleReserve}
+          onClick={handleOpenModal}
           variante="ButtonBlue"
           tamanho="md"
           sx={{
@@ -266,6 +273,12 @@ export const ReservaAluguel = () => {
           Reservar
         </Button>
       </Stack>
+
+      <ReservaWizard
+        open={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        equipment={equipment}
+      />
     </Box>
   )
 }
