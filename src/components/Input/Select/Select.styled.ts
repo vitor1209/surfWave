@@ -1,5 +1,7 @@
-import { Select, styled } from "@mui/material"
+import { createTheme, Select, styled } from "@mui/material"
 import type { StyledSelectProps } from "./SelectControlado.types"
+
+const FALLBACK_THEME = createTheme()
 
 export const SelectInput = styled(Select)<
     StyledSelectProps & { isPlaceholder?: boolean; bgcolor?: string }
@@ -92,14 +94,22 @@ export const SelectInput = styled(Select)<
     },
 }))
 
-export const SpanHelperText = styled("span")(({ theme }) => ({
-    ...theme.typography.body2,
-    color: theme.palette.secondary.main,
-    marginTop: theme.spacing(0.5),
-}))
+export const SpanHelperText = styled("span")(({ theme }) => {
+    const resolvedTheme = theme ?? FALLBACK_THEME
 
-export const SpanErro = styled("span")(({ theme }) => ({
-    ...theme.typography.body2,
-    color: theme.palette.error.main,
-    marginTop: theme.spacing(0.5),
-}))
+    return {
+        ...resolvedTheme.typography.body2,
+        color: resolvedTheme.palette.secondary.main,
+        marginTop: resolvedTheme.spacing(0.5),
+    }
+})
+
+export const SpanErro = styled("span")(({ theme }) => {
+    const resolvedTheme = theme ?? FALLBACK_THEME
+
+    return {
+        ...resolvedTheme.typography.body2,
+        color: resolvedTheme.palette.error.main,
+        marginTop: resolvedTheme.spacing(0.5),
+    }
+})

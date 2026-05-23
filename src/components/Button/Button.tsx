@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import * as Component from "./Button.styled"
 
 export const Button = ({
-    variante = "ButtonGreen",
+    variante = "ButtonBlue",
     tamanho,
     loading,
     disabled,

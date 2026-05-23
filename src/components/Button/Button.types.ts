@@ -3,7 +3,7 @@ import type { LucideIcon } from "lucide-react"
 
 export interface ButtonProp extends ButtonBaseProps {
     variante?:
-        | "ButtonGreen"
+        | "ButtonBlue"
         | "ButtonLinkBlack"
         | "ButtonLinkWhite"
         | "ButtonOrange"
