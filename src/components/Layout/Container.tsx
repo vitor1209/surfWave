@@ -1,6 +1,7 @@
 import { Box, Stack } from "@mui/material"
 import { motion } from "framer-motion"
 import { useContainer } from "@/components/Layout/Container.hook"
+import { Footer } from "@/components/Footer"
 import {
   headerSx,
   headerContentSx,
@@ -68,10 +69,8 @@ export const Container = ({ title, subtitle, children }: ContainerProps) => {
 
   return (
     <Stack
-      component="main"
       sx={{
-        height: "100vh",
-        overflow: "hidden",
+        minHeight: "100vh",
         flexDirection: "column",
       }}
     >
@@ -133,6 +132,9 @@ export const Container = ({ title, subtitle, children }: ContainerProps) => {
           </Box>
         </motion.div>
       </MotionBox>
+
+      {/* Footer */}
+      <Footer />
     </Stack>
   )
 }
