@@ -1,42 +1,210 @@
-import { Stack, Typography } from "@mui/material";
-import * as styled from "./Footer.styled";
-// import { LogoCultiva } from "../../assets/index";
+import { Box } from "@mui/material"
+import { motion } from "framer-motion"
+import {
+  footerRootSx,
+  footerContentSx,
+  footerGridSx,
+  footerSectionSx,
+  footerBrandSx,
+  footerDescriptionSx,
+  footerTitleSx,
+  footerLinkSx,
+  footerContactItemSx,
+  footerContactIconSx,
+  socialIconsSx,
+  socialButtonSx,
+  footerDividerSx,
+  footerCopyrightSx,
+} from "@/components/Footer/Footer.styles"
+
+const MotionBox = motion(Box)
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2,
+    },
+  },
+}
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut",
+    },
+  },
+}
 
 export const Footer = () => {
-    return (
-        <styled.ContainerFooter >
-            <Stack sx={{ display: "flex", flexDirection: { xs: "column", sm: "row" }, alignItems: { xs: "center", sm: "stretch" }, textAlign: { xs: "center", sm: "left" }, justifyContent: "space-around", gap: 4 }}>
-                <Stack sx={{ alignItems: { xs: "center", sm: "stretch" } }}>
-                    {/* <img src={LogoCultiva} alt="Logo Cultiva" width={150} /> */}
-                    <Typography variant="body2" color="text.secondary" >
-                        Conectando quem planta com quem consome.
-                    </Typography>
-                </Stack>
+  const navigationLinks = [
+    { label: "Início", href: "/" },
+    { label: "Aulas", href: "/aulas" },
+    { label: "Aluguel", href: "/aluguel" },
+    { label: "Galeria", href: "/galeria" },
+  ]
 
-                <Stack>
-                    <Typography variant="subtitle1">Contato</Typography>
-                    <Typography variant="body2" color="text.secondary" >Email cultivahortas@gmail.com</Typography>
-                    <Typography variant="body2" color="text.secondary" >Telefone: (11) 95383-7190</Typography>
-                </Stack>
+  const contactInfo = {
+    address: "Praia Belas Ondas, 123",
+    email: "contato@surfwave.com",
+    phone: "(48) 99999-9999",
+  }
 
-                <Stack >
-                    <Typography variant="subtitle1">Links Úteis</Typography>
-                    <Typography variant="body2" color="text.secondary" >Política de Privacidade</Typography>
-                    <Typography variant="body2" color="text.secondary" >Termos de Uso</Typography>
-                    <Typography variant="body2" color="text.secondary" >Ajuda</Typography>
-                </Stack>
-            </Stack>
+  const socialLinks = [
+    { name: "Instagram", icon: "📷", url: "#" },
+    { name: "Twitter", icon: "𝕏", url: "#" },
+    { name: "YouTube", icon: "▶️", url: "#" },
+  ]
 
-            <hr style={{ width: "100%", margin: '1.5% 0', border: "1px solid #dcdcdc" }} />
+  return (
+    <Box component="footer" sx={footerRootSx}>
+      <MotionBox
+        sx={footerContentSx}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={containerVariants}
+      >
+        {/* Main Grid Content */}
+        <Box sx={footerGridSx}>
+          {/* Left Column - Brand */}
+          <MotionBox sx={footerSectionSx} variants={itemVariants}>
+            <Box sx={footerBrandSx}>SurfWave</Box>
+            <Box sx={footerDescriptionSx}>
+              Transformando sonhos em realidade nas ondas desde 2010. Venha
+              fazer parte da nossa família surfista.
+            </Box>
 
-            <Stack sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                <Typography variant="body2" sx={{ textAlign: "center" }}>
-                    Projeto desenvolvido para conectar produtores e consumidores locais
-                </Typography>
-                <Typography variant="caption" color="text.secondary">
-                    © 2025 Cultiva+. Todos os direitos reservados.
-                </Typography>
-            </Stack>
-        </styled.ContainerFooter >
-    );
-};
+            {/* Social Icons */}
+            <Box sx={socialIconsSx}>
+              {socialLinks.map((social, index) => (
+                <motion.a
+                  key={social.name}
+                  href={social.url}
+                  aria-label={social.name}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  initial={{ opacity: 0, scale: 0 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{
+                    delay: index * 0.1,
+                    type: "spring",
+                    stiffness: 260,
+                    damping: 20,
+                  }}
+                >
+                  <Box
+                    component="div"
+                    sx={socialButtonSx}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        window.open(social.url)
+                      }
+                    }}
+                  >
+                    {social.icon}
+                  </Box>
+                </motion.a>
+              ))}
+            </Box>
+          </MotionBox>
+
+          {/* Center Column - Navigation */}
+          <MotionBox sx={footerSectionSx} variants={itemVariants}>
+            <Box sx={footerTitleSx}>Navegação</Box>
+            {navigationLinks.map((link) => (
+              <motion.a
+                key={link.label}
+                href={link.href}
+                whileHover={{ x: 4 }}
+                transition={{ duration: 0.2 }}
+              >
+                <Box sx={footerLinkSx}>{link.label}</Box>
+              </motion.a>
+            ))}
+          </MotionBox>
+
+          {/* Right Column - Contact */}
+          <MotionBox sx={footerSectionSx} variants={itemVariants}>
+            <Box sx={footerTitleSx}>Contato</Box>
+
+            <Box sx={footerContactItemSx}>
+              <Box sx={footerContactIconSx}>📍</Box>
+              <Box>{contactInfo.address}</Box>
+            </Box>
+
+            <Box sx={footerContactItemSx}>
+              <Box sx={footerContactIconSx}>✉️</Box>
+              <motion.a
+                href={`mailto:${contactInfo.email}`}
+                whileHover={{ x: 4 }}
+              >
+                <Box
+                  sx={{
+                    color: "rgba(0, 0, 0, 0.65)",
+                    textDecoration: "none",
+                    cursor: "pointer",
+                    transition: "color 0.3s",
+                    "&:hover": {
+                      color: "rgba(0, 0, 0, 0.85)",
+                    },
+                  }}
+                >
+                  {contactInfo.email}
+                </Box>
+              </motion.a>
+            </Box>
+
+            <Box sx={footerContactItemSx}>
+              <Box sx={footerContactIconSx}>☎️</Box>
+              <motion.a href={`tel:${contactInfo.phone}`} whileHover={{ x: 4 }}>
+                <Box
+                  sx={{
+                    color: "rgba(0, 0, 0, 0.65)",
+                    textDecoration: "none",
+                    cursor: "pointer",
+                    transition: "color 0.3s",
+                    "&:hover": {
+                      color: "rgba(0, 0, 0, 0.85)",
+                    },
+                  }}
+                >
+                  {contactInfo.phone}
+                </Box>
+              </motion.a>
+            </Box>
+          </MotionBox>
+        </Box>
+      </MotionBox>
+
+      {/* Divider */}
+      <MotionBox
+        sx={footerDividerSx}
+        initial={{ scaleX: 0 }}
+        whileInView={{ scaleX: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, delay: 0.3 }}
+      />
+
+      {/* Copyright */}
+      <MotionBox
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.5 }}
+      >
+        <Box sx={footerCopyrightSx}>
+          © 2026 WaveSurf. Todos os direitos reservados.
+        </Box>
+      </MotionBox>
+    </Box>
+  )
+}
