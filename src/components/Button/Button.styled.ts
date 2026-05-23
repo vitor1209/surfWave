@@ -6,7 +6,7 @@ export const ButtonVariants = styled(ButtonBase, {
     tamanho: "sm" | "md" | "lg" | "xl"
     espacamento: number
     variante:
-        | "ButtonGreen"
+        | "ButtonBlue"
         | "ButtonLinkBlack"
         | "ButtonLinkWhite"
         | "ButtonOrange"
@@ -46,8 +46,8 @@ export const ButtonVariants = styled(ButtonBase, {
             cursor: "not-allowed",
             pointerEvents: "none",
         },
-        ...(variante === "ButtonGreen" && {
-            backgroundColor: "#00A63E",
+        ...(variante === "ButtonBlue" && {
+            backgroundColor: "#72A6F3",
             color: "#FFFFFF",
             transition: " 0.5s",
         }),

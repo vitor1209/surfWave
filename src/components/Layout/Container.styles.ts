@@ -62,7 +62,7 @@ export const waveSx: SxProps<Theme> = {
   left: 0,
   width: "200%",
   height: "100%",
-  backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 120' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,50 Q300,0 600,50 T1200,50 L1200,120 L0,120 Z' fill='%23F5E6D3'/%3E%3C/svg%3E")`,
+  backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 120' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,50 Q300,0 600,50 T1200,50 L1200,120 L0,120 Z' fill='%23F7E2B3'/%3E%3C/svg%3E")`,
   backgroundSize: "50% 100%",
   backgroundRepeat: "repeat-x",
   animation: "wave 15s linear infinite",
@@ -71,7 +71,7 @@ export const waveSx: SxProps<Theme> = {
 export const contentAreaSx: SxProps<Theme> = {
   flex: 1,
   width: "100%",
-  backgroundColor: "#F5E6D3",
+  backgroundColor: "#F7E2B3",
   position: "relative",
   pt: {
     xs: 6,

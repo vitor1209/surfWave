@@ -15,8 +15,8 @@ import type { ContainerProps } from "@/components/Layout/Container.types"
 import { Header } from "../Header/Header"
 import { Button } from "../Button/Button"
 
-const MotionBox = motion(Box)
-const MotionSvg = motion.svg
+const MotionBox = motion.create(Box)
+const MotionSvg = motion.create("svg")
 
 const Wave = ({ delay, duration }: { delay: number; duration: number }) => (
   <MotionSvg

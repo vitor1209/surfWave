@@ -1,9 +1,7 @@
-import { Stack } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import * as styled from "./CardInfo.styled";
 import type { CardInfoProps } from "./CardInfo.types";
-import Typography from "@mui/joy/Typography";
 import Link from '@mui/joy/Link';
-
 
 export default function CardInfo({
     name,
@@ -15,38 +13,46 @@ export default function CardInfo({
     icon: Icon,
 }: CardInfoProps) {
     return (
-        <>
-            {tamanho === "lg" ? (
-                <styled.CardInfo tamanho={tamanho}>
-                    <Stack sx={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-                        <Typography level="body-sm">{name}</Typography>
+        <styled.CardInfo tamanho={tamanho}>
+            <styled.StackIcon colorKey={color}>
+                <Icon stroke="#FFFFFF" size={40} />
+            </styled.StackIcon>
 
-                        <Stack sx={{ alignSelf: "flex-start", textAlign: "start" }}>
-                            <Typography fontSize="1.5rem">{valor}</Typography>
-                            <Typography fontSize="0.875rem" level="body-sm" color="success">
-                                {acrescimo}
-                            </Typography>
-                        </Stack>
-                    </Stack>
+            <Stack sx={{ alignItems: "center", textAlign: "center", gap: 0.75 }}>
+                {tamanho === "lg" ? (
+                    <Typography variant="h1" >
 
-                    <styled.StackIcon colorKey={color}>
-                        <Icon stroke={color} size={24} />
-                    </styled.StackIcon>
-                </styled.CardInfo>
-            ) : (
-                <styled.CardInfo tamanho={tamanho}>
+                        {name}
+                    </Typography>
+                ) : (
+                    <Link
+                        href={to}
+                        color="neutral"
+                        fontSize="1rem"
+                        sx={{
+                            justifyContent: "center",
+                            color: "#000",
+                            textTransform: "uppercase",
+                            letterSpacing: "0.08em",
+                            textDecoration: "none",
+                        }}
+                        overlay
+                    >
+                        {name}
+                    </Link>
+                )}
 
-                    <styled.StackIcon colorKey={color} sx={{ alignSelf: "center" }}>
-                        <Icon stroke={color} size={24} />
-                    </styled.StackIcon>
+                <Typography variant="body1" >
 
-                    <Stack sx={{ display: "flex", flexDirection: "column", justifyContent: "space-evenly" }}>
-                        <Link href={to} color="neutral" fontSize="1rem" sx={{ justifyContent: 'center', color: "#000" }} overlay>{name}</Link>
-                        <Typography level="body-sm" fontSize="0.875rem">{valor}</Typography>
-                    </Stack>
-                </styled.CardInfo >
-            )
-            }
-        </>
+                    {valor}
+                </Typography>
+
+                {acrescimo ? (
+                    <Typography variant="h2" >
+                        {acrescimo}
+                    </Typography>
+                ) : null}
+            </Stack>
+        </styled.CardInfo>
     );
 }

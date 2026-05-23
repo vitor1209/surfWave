@@ -1,12 +1,15 @@
 import { Card, Stack, styled } from "@mui/material"
 
+const CARD_BACKGROUND = "#FFF4DB"
+const ICON_BACKGROUND = "#66A3FE"
+
 export const CardInfo = styled(Card, {
     shouldForwardProp: (prop) => prop !== "tamanho",
 })<{
     tamanho: "md" | "lg"
 }>(({ theme, tamanho }) => {
     const sizeMap = {
-        md: { height: "9.5rem", width: "18rem" },
+        md: { height: "9.5rem", width: "22rem" },
         lg: { height: "10rem", width: "19rem" },
     }
 
@@ -15,31 +18,36 @@ export const CardInfo = styled(Card, {
     return {
         width,
         height,
-        padding: "2% 2%",
+        padding: tamanho === "lg" ? "1.5rem 1.75rem" : "7rem 1.5rem",
         display: "flex",
         flex: "1",
         position: "relative",
-        borderRadius: "14px",
-        backgroundColor: "#fff",
-        border: "1px solid rgba(0, 0, 0, 0.1)",
+        borderRadius: "32px",
+        backgroundColor: CARD_BACKGROUND,
+        border: "none",
         boxSizing: "border-box",
-        flexDirection: tamanho === "lg" ? "row" : "column",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
         cursor: "pointer",
         textAlign: "center",
         fontSize: "1rem",
         color: "#0a0a0a",
-        justifyContent: "space-between",
-        transition: "transform 0.2s ease-in-out",
+        gap: tamanho === "lg" ? "0.85rem" : "0.7rem",
+        transition: "transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out",
+        boxShadow: "0 1px 0 rgba(0, 0, 0, 0.02)",
 
         "&:hover": {
-            transform: "scale(1.05, 1.05)",
+            transform: "translateY(-2px)",
+            boxShadow: "0 10px 24px rgba(102, 163, 254, 0.12)",
         },
 
         [theme.breakpoints.down("sm")]: {
             width: tamanho === "md" ? "14rem" : "15rem",
-            height: tamanho === "md" ? "7rem" : "8rem",
+            height: tamanho === "md" ? "7.5rem" : "8rem",
             fontSize: "0.9rem",
             padding: "1rem",
+            borderRadius: "28px",
         },
     }
 })
@@ -48,28 +56,22 @@ export const StackIcon = styled(Stack, {
     shouldForwardProp: (prop) => prop !== "colorKey",
 })<{
     colorKey: "blue" | "green" | "purple" | "orange"
-}>(({ theme, colorKey }) => {
-    const colorMap = {
-        blue: { backgroundColor: "#DBEAFE" },
-        green: { backgroundColor: "#DCFCE7" },
-        purple: { backgroundColor: "#F3E8FF" },
-        orange: { backgroundColor: "#FFEDD5" },
-    }
-
+}>(({ theme }) => {
     return {
-        backgroundColor: colorMap[colorKey].backgroundColor,
+        backgroundColor: ICON_BACKGROUND,
         borderRadius: "50%",
-        padding: "0.5rem",
-        height: "2.25rem",
-        width: "2.25rem",
+        padding: "0.6rem",
+        height: "5rem",
+        width: "5rem",
         alignItems: "center",
         justifyContent: "center",
-        alignSelf: "flex-end",
+        alignSelf: "center",
+        flexShrink: 0,
 
         [theme.breakpoints.down("sm")]: {
-            height: "1.8rem",
-            width: "1.8rem",
-            padding: "0.4rem",
+            height: "3.1rem",
+            width: "3.1rem",
+            padding: "0.45rem",
         },
     }
 })
