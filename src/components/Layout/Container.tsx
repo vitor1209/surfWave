@@ -89,11 +89,18 @@ export const Container = ({ title, subtitle, children }: ContainerProps) => {
         }
       >
         <>
-          <Button variante="ButtonLinkWhite" tamanho="sm" to="/HomeConsumidor">Início</Button>
-          <Button variante="ButtonLinkWhite" tamanho="sm">Produtos</Button>
-
-          <Button variante="ButtonLinkWhite" tamanho="sm">Produtores</Button>
-          <Button variante="ButtonLinkWhite" to="/Sobre" tamanho="sm">Sobre</Button>
+          <Button variante="ButtonLinkWhite" tamanho="sm" to="/">
+            Início
+          </Button>
+          <Button variante="ButtonLinkWhite" tamanho="sm" to="/aulas">
+            Aulas
+          </Button>
+          <Button variante="ButtonLinkWhite" tamanho="sm" to="/aluguel">
+            Aluguel
+          </Button>
+          <Button variante="ButtonLinkWhite" tamanho="sm" to="/galeria">
+            Galeria
+          </Button>
         </>
       </Header>
       {/* Header Section */}
