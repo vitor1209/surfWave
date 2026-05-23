@@ -18,6 +18,8 @@ export type RentalEquipment = {
   price: number
   image: string
   label: string
+  includes: string[]
+  conditions: string[]
 }
 
 export type CategoryFilter = {

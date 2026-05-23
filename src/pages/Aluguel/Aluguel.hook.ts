@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { faker } from "@faker-js/faker"
 
 import {
@@ -52,6 +53,23 @@ const categories: CategoryFilter[] = [
   },
 ]
 
+const includesPool = [
+  "Prancha completa",
+  "Parafina inclusa",
+  "Capa de protecao",
+  "Quilhas montadas",
+  "Leash de seguranca",
+  "Kit de reparo rapido",
+]
+
+const conditionsPool = [
+  "Documento com foto necessario",
+  "Caucao de R$ 200 (devolvido na entrega)",
+  "Devolucao ate as 18h do ultimo dia",
+  "Retirada mediante assinatura",
+  "Atraso sujeito a taxa adicional",
+]
+
 const createEquipment = (): RentalEquipment[] => {
   const equipment: RentalEquipment[] = []
 
@@ -77,6 +95,12 @@ const createEquipment = (): RentalEquipment[] => {
         }),
 
         label: category.charAt(0).toUpperCase() + category.slice(1),
+        includes: faker.helpers
+          .shuffle(includesPool)
+          .slice(0, 4),
+        conditions: faker.helpers
+          .shuffle(conditionsPool)
+          .slice(0, 3),
       })
     })
   })
@@ -84,9 +108,10 @@ const createEquipment = (): RentalEquipment[] => {
   return equipment
 }
 
-const allEquipment = createEquipment()
+export const allEquipment = createEquipment()
 
 export const useAluguel = (): UseAluguelReturn => {
+  const navigate = useNavigate()
   const [search, setSearch] = useState("")
 
   const [activeCategory, setActiveCategory] =
@@ -109,7 +134,7 @@ export const useAluguel = (): UseAluguelReturn => {
 
     if (!equipment) return
 
-    alert(`Reserva de "${equipment.name}" realizada com sucesso!`)
+    navigate(`/aluguel/reserva/${id}`)
   }
 
   return {
