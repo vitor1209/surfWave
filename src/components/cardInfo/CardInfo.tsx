@@ -20,7 +20,7 @@ export default function CardInfo({
 
             <Stack sx={{ alignItems: "center", textAlign: "center", gap: 0.75 }}>
                 {tamanho === "lg" ? (
-                    <Typography variant="h1" >
+                    <Typography variant="h1"  >
 
                         {name}
                     </Typography>
@@ -28,13 +28,15 @@ export default function CardInfo({
                     <Link
                         href={to}
                         color="neutral"
-                        fontSize="1rem"
+                        fontSize="1.4rem"
                         sx={{
                             justifyContent: "center",
                             color: "#000",
                             textTransform: "uppercase",
                             letterSpacing: "0.08em",
                             textDecoration: "none",
+                            fontFamily: 'Amatica SC, sans-serif',
+                            fontWeight: "bold"
                         }}
                         overlay
                     >

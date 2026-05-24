@@ -33,7 +33,7 @@ export const Home = () => {
       </Stack>
 
       <Stack sx={{ gap: 4 }}>
-        <Typography variant="h2" >
+        <Typography variant="h2" align="center">
           Previsão do tempo e mar
         </Typography>
 
