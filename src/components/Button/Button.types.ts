@@ -1,7 +1,9 @@
 import type { ButtonBaseProps } from "@mui/material"
 import type { LucideIcon } from "lucide-react"
+import type { ReactNode } from "react"
 
 export interface ButtonProp extends ButtonBaseProps {
+    children?: ReactNode
     variante?:
         | "ButtonBlue"
         | "ButtonLinkBlack"

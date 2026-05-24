@@ -1,4 +1,5 @@
 import { Box } from "@mui/material"
+import { Globe, Mail, MapPin, Phone, PlayCircle, Share2 } from "lucide-react"
 import {
   footerRootSx,
   footerContentSx,
@@ -17,85 +18,79 @@ import {
 } from "@/components/Footer/Footer.styles"
 
 export const Footer = () => {
-  const navigationLinks = [
+  const linksNavegacao = [
     { label: "Início", href: "/" },
     { label: "Aulas", href: "/aulas" },
     { label: "Aluguel", href: "/aluguel" },
     { label: "Galeria", href: "/galeria" },
   ]
 
-  const contactInfo = {
+  const informacoesContato = {
     address: "Praia Belas Ondas, 123",
     email: "contato@surfwave.com",
     phone: "(48) 99999-9999",
   }
 
-  const socialLinks = [
-    { name: "Instagram", icon: "📷", url: "#" },
-    { name: "Twitter", icon: "𝕏", url: "#" },
-    { name: "YouTube", icon: "▶️", url: "#" },
+  const linksSociais = [
+    { name: "Rede social", icon: Share2, url: "#" },
+    { name: "Portal", icon: Globe, url: "#" },
+    { name: "Vídeos", icon: PlayCircle, url: "#" },
   ]
 
   return (
     <Box component="footer" sx={footerRootSx}>
       <Box sx={footerContentSx}>
-        {/* Main Grid Content */}
         <Box sx={footerGridSx}>
-          {/* Left Column - Brand */}
           <Box sx={footerSectionSx}>
             <Box sx={footerBrandSx}>SurfWave</Box>
             <Box sx={footerDescriptionSx}>
-              Transformando sonhos em realidade nas ondas desde 2010. Venha
-              fazer parte da nossa família surfista.
+              Transformando dias comuns em experiências memoráveis no mar desde 2010.
             </Box>
 
-            {/* Social Icons */}
             <Box sx={socialIconsSx}>
-              {socialLinks.map((social) => (
-                <a
-                  key={social.name}
-                  href={social.url}
-                  aria-label={social.name}
-                  style={{ textDecoration: "none" }}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Box
-                    component="div"
-                    sx={{
-                      ...socialButtonSx,
-                      transition: "transform 150ms ease, opacity 200ms ease",
-                      '&:hover': { transform: 'scale(1.08)' },
-                      '&:active': { transform: 'scale(0.95)' },
-                    }}
-                    role="button"
-                    tabIndex={0}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" || e.key === " ") {
-                        window.open(social.url)
-                      }
-                    }}
+              {linksSociais.map((social) => {
+                const IconeSocial = social.icon
+
+                return (
+                  <a
+                    key={social.name}
+                    href={social.url}
+                    aria-label={social.name}
+                    style={{ textDecoration: "none" }}
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    {social.icon}
-                  </Box>
-                </a>
-              ))}
+                    <Box
+                      component="div"
+                      sx={socialButtonSx}
+                      role="button"
+                      tabIndex={0}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          window.open(social.url)
+                        }
+                      }}
+                    >
+                      <IconeSocial size={20} strokeWidth={2.2} />
+                    </Box>
+                  </a>
+                )
+              })}
             </Box>
           </Box>
 
-          {/* Center Column - Navigation */}
           <Box sx={footerSectionSx}>
             <Box sx={footerTitleSx}>Navegação</Box>
-            {navigationLinks.map((link) => (
+            {linksNavegacao.map((link) => (
               <Box
                 component="a"
                 key={link.label}
                 href={link.href}
                 sx={{
                   ...footerLinkSx,
-                  display: 'block',
-                  transition: 'transform 200ms ease',
-                  '&:hover': { transform: 'translateX(4px)' },
+                  display: "block",
+                  transition: "transform 200ms ease",
+                  "&:hover": { transform: "translateX(4px)" },
                 }}
               >
                 {link.label}
@@ -103,56 +98,59 @@ export const Footer = () => {
             ))}
           </Box>
 
-          {/* Right Column - Contact */}
           <Box sx={footerSectionSx}>
             <Box sx={footerTitleSx}>Contato</Box>
 
             <Box sx={footerContactItemSx}>
-              <Box sx={footerContactIconSx}>📍</Box>
-              <Box>{contactInfo.address}</Box>
+              <Box sx={footerContactIconSx}>
+                <MapPin size={18} />
+              </Box>
+              <Box>{informacoesContato.address}</Box>
             </Box>
 
             <Box sx={footerContactItemSx}>
-              <Box sx={footerContactIconSx}>✉️</Box>
+              <Box sx={footerContactIconSx}>
+                <Mail size={18} />
+              </Box>
               <Box
                 component="a"
-                href={`mailto:${contactInfo.email}`}
+                href={`mailto:${informacoesContato.email}`}
                 sx={{
-                  color: "rgba(0, 0, 0, 0.65)",
+                  color: "rgba(24, 50, 76, 0.72)",
                   textDecoration: "none",
                   cursor: "pointer",
                   transition: "color 0.3s, transform 120ms ease",
-                  '&:hover': { color: 'rgba(0, 0, 0, 0.85)', transform: 'translateX(4px)' },
+                  "&:hover": { color: "#18324C", transform: "translateX(4px)" },
                 }}
               >
-                {contactInfo.email}
+                {informacoesContato.email}
               </Box>
             </Box>
 
             <Box sx={footerContactItemSx}>
-              <Box sx={footerContactIconSx}>☎️</Box>
+              <Box sx={footerContactIconSx}>
+                <Phone size={18} />
+              </Box>
               <Box
                 component="a"
-                href={`tel:${contactInfo.phone}`}
+                href={`tel:${informacoesContato.phone}`}
                 sx={{
-                  color: "rgba(0, 0, 0, 0.65)",
+                  color: "rgba(24, 50, 76, 0.72)",
                   textDecoration: "none",
                   cursor: "pointer",
                   transition: "color 0.3s, transform 120ms ease",
-                  '&:hover': { color: 'rgba(0, 0, 0, 0.85)', transform: 'translateX(4px)' },
+                  "&:hover": { color: "#18324C", transform: "translateX(4px)" },
                 }}
               >
-                {contactInfo.phone}
+                {informacoesContato.phone}
               </Box>
             </Box>
           </Box>
         </Box>
       </Box>
 
-      {/* Divider */}
       <Box sx={footerDividerSx} />
 
-      {/* Copyright */}
       <Box>
         <Box sx={footerCopyrightSx}>
           © 2026 WaveSurf. Todos os direitos reservados.

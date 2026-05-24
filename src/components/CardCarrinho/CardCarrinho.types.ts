@@ -6,6 +6,6 @@ export interface ProductCardComponentProps {
     quantity: number
     imageUrl: string
     onIncrease?: () => void
-    onDecrease: (id: string) => void
+    onDecrease: () => void
     onDelete?: () => void
 }

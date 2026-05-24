@@ -2,7 +2,7 @@ import type { SxProps, Theme } from "@mui/material"
 
 export const footerRootSx: SxProps<Theme> = {
   width: "100%",
-  background: "#F7E2B3",
+  background: "linear-gradient(180deg, #FFF8ED 0%, #F8E6BF 100%)",
   marginTop: "auto",
   borderTop: "1px solid rgba(0, 0, 0, 0.08)",
   boxShadow: "0 -8px 32px rgba(0, 0, 0, 0.04)",
@@ -33,9 +33,9 @@ export const footerSectionSx: SxProps<Theme> = {
 export const footerBrandSx: SxProps<Theme> = {
   fontSize: { xs: "24px", sm: "28px", md: "32px" },
   fontWeight: 700,
-  color: "rgba(0, 0, 0, 0.87)",
+  color: "#18324C",
   letterSpacing: "-0.5px",
-  background: "linear-gradient(135deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.7) 100%)",
+  background: "linear-gradient(135deg, #18324C 0%, #2D6CDF 100%)",
   WebkitBackgroundClip: "text",
   WebkitTextFillColor: "transparent",
   backgroundClip: "text",
@@ -53,7 +53,7 @@ export const footerDescriptionSx: SxProps<Theme> = {
 export const footerTitleSx: SxProps<Theme> = {
   fontSize: { xs: "15px", sm: "16px", md: "17px" },
   fontWeight: 600,
-  color: "rgba(0, 0, 0, 0.87)",
+  color: "#18324C",
   textTransform: "uppercase",
   letterSpacing: "0.5px",
   mb: 1,
@@ -61,13 +61,13 @@ export const footerTitleSx: SxProps<Theme> = {
 
 export const footerLinkSx: SxProps<Theme> = {
   fontSize: { xs: "13px", sm: "14px", md: "15px" },
-  color: "rgba(0, 0, 0, 0.65)",
+  color: "rgba(24, 50, 76, 0.72)",
   cursor: "pointer",
   transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
   textDecoration: "none",
   display: "inline-block",
   "&:hover": {
-    color: "rgba(0, 0, 0, 0.87)",
+    color: "#18324C",
   },
 }
 
@@ -76,7 +76,7 @@ export const footerContactItemSx: SxProps<Theme> = {
   alignItems: "flex-start",
   gap: 1.5,
   fontSize: { xs: "13px", sm: "14px", md: "15px" },
-  color: "rgba(0, 0, 0, 0.65)",
+  color: "rgba(24, 50, 76, 0.72)",
   lineHeight: 1.6,
 }
 
@@ -99,36 +99,36 @@ export const socialButtonSx: SxProps<Theme> = {
   width: { xs: "40px", sm: "44px", md: "48px" },
   height: { xs: "40px", sm: "44px", md: "48px" },
   borderRadius: "50%",
-  background: "linear-gradient(135deg, #D4AF37 0%, #C9A227 100%)",
+  background: "linear-gradient(135deg, #2D6CDF 0%, #184B9B 100%)",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
   cursor: "pointer",
   fontSize: { xs: "18px", sm: "20px", md: "22px" },
   transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-  boxShadow: "0 4px 12px rgba(212, 175, 55, 0.25)",
+  boxShadow: "0 4px 12px rgba(45, 108, 223, 0.24)",
   border: "none",
   "&:hover": {
-    boxShadow: "0 6px 20px rgba(212, 175, 55, 0.35)",
+    boxShadow: "0 6px 20px rgba(45, 108, 223, 0.34)",
     transform: "translateY(-2px)",
   },
   "&:active": {
     transform: "translateY(0)",
-    boxShadow: "0 2px 8px rgba(212, 175, 55, 0.2)",
+    boxShadow: "0 2px 8px rgba(45, 108, 223, 0.18)",
   },
 }
 
 export const footerDividerSx: SxProps<Theme> = {
   width: "100%",
   height: "1px",
-  background: "linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.1) 50%, transparent 100%)",
+  background: "linear-gradient(90deg, transparent 0%, rgba(24, 50, 76, 0.12) 50%, transparent 100%)",
   mb: { xs: 2.5, sm: 3, md: 3.5 },
   transformOrigin: "center",
 }
 
 export const footerCopyrightSx: SxProps<Theme> = {
   fontSize: { xs: "12px", sm: "13px", md: "14px" },
-  color: "rgba(0, 0, 0, 0.55)",
+  color: "rgba(24, 50, 76, 0.58)",
   textAlign: "center",
   fontWeight: 400,
   letterSpacing: "0.2px",

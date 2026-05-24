@@ -1,57 +1,60 @@
-import { HeaderContainer } from "./Header.styled.ts";
-import Stack from '@mui/material/Stack';
-import { Box, Drawer, IconButton, useMediaQuery, useTheme } from "@mui/material";
-import { MenuIcon } from "lucide-react";
-import { useState } from "react";
-import type { HeaderProps } from "./Header.types.ts";
+import { Box, Drawer, IconButton, Stack, useMediaQuery, useTheme } from "@mui/material"
+import { MenuIcon } from "lucide-react"
+import { useState } from "react"
 
-export const Header: React.FC<HeaderProps> = ({ children, end, start }) => {
+import { HeaderContainer } from "./Header.styled"
+import type { HeaderProps } from "./Header.types"
 
-    const theme = useTheme();
-    const isMobile = useMediaQuery(theme.breakpoints.down('md'))
-    const [openNav, setOpenNav] = useState<boolean>(false);
+export const Header = ({ children, end, start }: HeaderProps) => {
+    const tema = useTheme()
+    const isMobile = useMediaQuery(tema.breakpoints.down("md"))
+    const [abrirNavegacao, setAbrirNavegacao] = useState(false)
 
-    const toggleDrawer = () => setOpenNav(!openNav);
+    const alternarDrawer = () => {
+        setAbrirNavegacao((estadoAtual) => !estadoAtual)
+    }
 
-    const navButtons = (
-        <Stack sx={{ display: "flex", alignItems: "center", flexDirection: "column", gap: 2, p: 2 }}>
+    const conteudoNavegacao = (
+        <Stack sx={{ alignItems: "center", flexDirection: "column", gap: 2, p: 2 }}>
+            {start}
             {children}
-            {end && <>{end}</>}
-        </Stack>)
-
+            {end}
+        </Stack>
+    )
 
     return (
-        <HeaderContainer className="BlueHeader">
-       
+        <HeaderContainer>
             {isMobile ? (
                 <>
-                    <IconButton onClick={toggleDrawer}>
+                    <IconButton aria-label="Abrir navegação" onClick={alternarDrawer} sx={{ color: "inherit" }}>
                         <MenuIcon size={24} />
                     </IconButton>
-                    <Drawer anchor="right" open={openNav} onClose={toggleDrawer}>
+                    <Drawer anchor="right" open={abrirNavegacao} onClose={alternarDrawer}>
                         <Box
                             sx={{
-                                width: 250,
+                                width: 280,
                                 display: "flex",
                                 flexDirection: "column",
-                                alignItems: "center",
+                                alignItems: "stretch",
                                 justifyContent: "center",
                                 height: "100%",
-                                p: 2,
+                                p: 3,
+                                backgroundColor: "background.paper",
                             }}
                         >
-                            {navButtons}
+                            {conteudoNavegacao}
                         </Box>
                     </Drawer>
                 </>
             ) : (
                 <>
-                    <>{start}</>
+                    <Box sx={{ display: "flex", alignItems: "center" }}>{start}</Box>
                     <Stack sx={{ display: "flex", flexDirection: "row", gap: 2, alignItems: "center" }}>
                         {children}
                     </Stack>
-                    {end && <>{end}</>}
+                    {end}
                 </>
             )}
-        </HeaderContainer>)
+        </HeaderContainer>
+    )
 }

@@ -1,24 +1,23 @@
-import type { EstiloInput, InputProps, MaskedInputComponentProps } from "./Input.types"
 import { InputAdornment, Stack, Typography } from "@mui/material"
-import * as Styled from "./Input.styled"
 import { Controller, type FieldValues } from "react-hook-form"
 import { IMaskInput } from "react-imask"
-import { forwardRef, } from "react"
+import { type Ref } from "react"
 
-const MaskedInputComponent = forwardRef<HTMLInputElement, MaskedInputComponentProps>(
-    ({ value, ...props }, ref) => (
-        <IMaskInput
-            {...props}
-            overwrite={false}
-            lazy={false}
-            inputRef={ref}
-            value={String(value ?? "")}
-            // onAccept={(val) => {
-            //     if (onChange)
-            //         onChange({ target: { value: val } } as unknown as ChangeEvent<HTMLInputElement>)
-            // }}
-        />
-    )
+import * as Styled from "./Input.styled"
+import type { EstiloInput, InputProps, MaskedInputComponentProps } from "./Input.types"
+
+const ComponenteMascara = ({
+    inputRef,
+    value,
+    ...props
+}: MaskedInputComponentProps & { inputRef?: Ref<HTMLInputElement> }) => (
+    <IMaskInput
+        {...props}
+        overwrite={false}
+        lazy={false}
+        inputRef={inputRef}
+        value={String(value ?? "")}
+    />
 )
 
 export const Input = <T extends FieldValues>({
@@ -34,7 +33,7 @@ export const Input = <T extends FieldValues>({
             name={name}
             control={control}
             render={({ field, fieldState: { error } }) => {
-                const defaultProps: EstiloInput = {
+                const propriedadesPadrao: EstiloInput = {
                     ...props,
                     ...field,
                     id: name,
@@ -57,7 +56,7 @@ export const Input = <T extends FieldValues>({
                             <Typography
                                 className="input-label"
                                 variant="subtitle1"
-                                color="#0A0A0A"
+                                color="text.primary"
                                 sx={{
                                     display: "inline-block",
                                     transition: "transform 0.2s ease",
@@ -70,20 +69,17 @@ export const Input = <T extends FieldValues>({
                         )}
 
                         <Styled.InputForm
-                            {...defaultProps}
-                            inputComponent={mask ? MaskedInputComponent : undefined}
+                            {...propriedadesPadrao}
+                            inputComponent={mask ? ComponenteMascara : undefined}
                             inputProps={mask ? { mask } : {}}
                             endAdornment={
                                 <InputAdornment position="end">
-                                    {Icon && <Icon size={20} color="#FF2222" />}
+                                    {Icon && <Icon size={20} color="#D92D20" />}
                                 </InputAdornment>
                             }
                         />
 
-                        <Typography
-                            variant="body2"
-                            color="#A91208"
-                        >
+                        <Typography variant="body2" color="error.main">
                             {error?.message || " "}
                         </Typography>
                     </Stack>

@@ -33,11 +33,11 @@ export type EquipmentCardProps = {
 }
 
 export type UseAluguelReturn = {
-  search: string
-  setSearch: Dispatch<SetStateAction<string>>
-  activeCategory: EquipmentCategory
-  setActiveCategory: Dispatch<SetStateAction<EquipmentCategory>>
-  filteredEquipment: RentalEquipment[]
+  busca: string
+  setBusca: Dispatch<SetStateAction<string>>
+  categoriaAtiva: EquipmentCategory
+  setCategoriaAtiva: Dispatch<SetStateAction<EquipmentCategory>>
+  equipamentosFiltrados: RentalEquipment[]
   categories: CategoryFilter[]
-  handleReserve: (id: string) => void
+  handleReservar: (id: string) => void
 }

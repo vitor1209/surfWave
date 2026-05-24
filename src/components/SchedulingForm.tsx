@@ -13,7 +13,6 @@ import {
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns"
 
 import { format } from "date-fns"
-import { ptBR } from "date-fns/locale/pt-BR"
 
 import {
   Controller,
@@ -29,6 +28,7 @@ import {
   schedulingFormSchema,
   type SchedulingFormSchema,
 } from "./SchedulingForm.schema"
+import { ptBR } from "date-fns/locale"
 
 export type SchedulingFormProps = {
   open: boolean

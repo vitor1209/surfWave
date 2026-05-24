@@ -11,9 +11,9 @@ import {
 
 faker.seed(42)
 
-const equipmentNames = {
+const nomesEquipamentos = {
   pranchas: [
-    "Prancha Longboard Clássic",
+    "Prancha Longboard Clássica",
     "Prancha Shortboard Pro",
     "Prancha Funboard",
   ],
@@ -25,7 +25,7 @@ const equipmentNames = {
   ],
 
   acessorios: [
-    "Capa do Prancha",
+    "Capa da Prancha",
     "Lycra UV Protection",
     "Prancha Soft Top Iniciante",
   ],
@@ -53,29 +53,29 @@ const categories: CategoryFilter[] = [
   },
 ]
 
-const includesPool = [
+const itensInclusos = [
   "Prancha completa",
   "Parafina inclusa",
-  "Capa de protecao",
+  "Capa de proteção",
   "Quilhas montadas",
-  "Leash de seguranca",
-  "Kit de reparo rapido",
+  "Leash de segurança",
+  "Kit de reparo rápido",
 ]
 
-const conditionsPool = [
-  "Documento com foto necessario",
+const condicoesLocacao = [
+  "Documento com foto necessário",
   "Caucao de R$ 200 (devolvido na entrega)",
-  "Devolucao ate as 18h do ultimo dia",
+  "Devolução até as 18h do último dia",
   "Retirada mediante assinatura",
   "Atraso sujeito a taxa adicional",
 ]
 
-const createEquipment = (): RentalEquipment[] => {
-  const equipment: RentalEquipment[] = []
+const criarEquipamentos = (): RentalEquipment[] => {
+  const equipamentos: RentalEquipment[] = []
 
-  Object.entries(equipmentNames).forEach(([category, names]) => {
+  Object.entries(nomesEquipamentos).forEach(([category, names]) => {
     names.forEach((name) => {
-      equipment.push({
+      equipamentos.push({
         id: faker.string.uuid(),
 
         name,
@@ -96,58 +96,58 @@ const createEquipment = (): RentalEquipment[] => {
 
         label: category.charAt(0).toUpperCase() + category.slice(1),
         includes: faker.helpers
-          .shuffle(includesPool)
+          .shuffle(itensInclusos)
           .slice(0, 4),
         conditions: faker.helpers
-          .shuffle(conditionsPool)
+          .shuffle(condicoesLocacao)
           .slice(0, 3),
       })
     })
   })
 
-  return equipment
+  return equipamentos
 }
 
-export const allEquipment = createEquipment()
+export const allEquipment = criarEquipamentos()
 
 export const useAluguel = (): UseAluguelReturn => {
   const navigate = useNavigate()
-  const [search, setSearch] = useState("")
+  const [busca, setBusca] = useState("")
 
-  const [activeCategory, setActiveCategory] =
+  const [categoriaAtiva, setCategoriaAtiva] =
     useState<EquipmentCategory>(EquipmentCategory.TODOS)
 
-  const filteredEquipment = allEquipment.filter((item) => {
+  const equipamentosFiltrados = allEquipment.filter((item) => {
     const matchesCategory =
-      activeCategory === EquipmentCategory.TODOS ||
-      item.category === activeCategory
+      categoriaAtiva === EquipmentCategory.TODOS ||
+      item.category === categoriaAtiva
 
     const matchesSearch =
-      item.name.toLowerCase().includes(search.toLowerCase()) ||
-      item.description.toLowerCase().includes(search.toLowerCase())
+      item.name.toLowerCase().includes(busca.toLowerCase()) ||
+      item.description.toLowerCase().includes(busca.toLowerCase())
 
     return matchesCategory && matchesSearch
   })
 
-  const handleReserve = (id: string) => {
-    const equipment = allEquipment.find((item) => item.id === id)
+  const handleReservar = (id: string) => {
+    const equipamento = allEquipment.find((item) => item.id === id)
 
-    if (!equipment) return
+    if (!equipamento) return
 
     navigate(`/aluguel/reserva/${id}`)
   }
 
   return {
-    search,
-    setSearch,
+    busca,
+    setBusca,
 
-    activeCategory,
-    setActiveCategory,
+    categoriaAtiva,
+    setCategoriaAtiva,
 
-    filteredEquipment,
+    equipamentosFiltrados,
 
     categories,
 
-    handleReserve,
+    handleReservar,
   }
 }

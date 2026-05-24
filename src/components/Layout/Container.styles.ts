@@ -3,7 +3,8 @@ import type { SxProps, Theme } from "@mui/material"
 export const headerSx: SxProps<Theme> = {
   position: "relative",
   minHeight: "100vh",
-  background: "linear-gradient(135deg, #4A90E2 0%, #357ABD 100%)",
+  background:
+    "radial-gradient(circle at top, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0) 36%), linear-gradient(135deg, #2D6CDF 0%, #184B9B 100%)",
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
@@ -17,16 +18,17 @@ export const headerContentSx: SxProps<Theme> = {
   color: "white",
   zIndex: 2,
   position: "relative",
+  px: { xs: 2, sm: 3, md: 4 },
 }
 
 export const titleSx: SxProps<Theme> = {
   fontSize: {
-    xs: "2.5rem",
-    sm: "3.5rem",
-    md: "4.5rem",
+    xs: "2.75rem",
+    sm: "3.75rem",
+    md: "5rem",
   },
   fontWeight: 300,
-  letterSpacing: "0.15em",
+  letterSpacing: "0.12em",
   mb: 1,
   textTransform: "uppercase",
   animation: "fadeInDown 0.8s ease-in-out",
@@ -34,8 +36,8 @@ export const titleSx: SxProps<Theme> = {
 
 export const subtitleSx: SxProps<Theme> = {
   fontSize: {
-    xs: "0.9rem",
-    sm: "1rem",
+    xs: "0.95rem",
+    sm: "1.05rem",
     md: "1.1rem",
   },
   fontWeight: 400,
@@ -56,32 +58,20 @@ export const waveContainerSx: SxProps<Theme> = {
   zIndex: 1,
 }
 
-export const waveSx: SxProps<Theme> = {
-  position: "absolute",
-  bottom: 0,
-  left: 0,
-  width: "200%",
-  height: "100%",
-  backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 120' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,50 Q300,0 600,50 T1200,50 L1200,120 L0,120 Z' fill='%23F7E2B3'/%3E%3C/svg%3E")`,
-  backgroundSize: "50% 100%",
-  backgroundRepeat: "repeat-x",
-  animation: "wave 15s linear infinite",
-}
-
 export const contentAreaSx: SxProps<Theme> = {
   flex: 1,
   width: "100%",
-  backgroundColor: "#F7E2B3",
+  background: "linear-gradient(180deg, #FFF8ED 0%, #FFFDF8 100%)",
   position: "relative",
   pt: {
-    xs: 6,
-    sm: 8,
-    md: 10,
+    xs: 5,
+    sm: 7,
+    md: 9,
   },
   pb: {
-    xs: 6,
-    sm: 8,
-    md: 10,
+    xs: 5,
+    sm: 7,
+    md: 9,
   },
   px: {
     xs: 2,
@@ -95,7 +85,7 @@ export const headerBrandSx: SxProps<Theme> = {
   fontWeight: 700,
   color: "#fff",
   letterSpacing: "-0.5px",
-  background: "#fff",
+  background: "rgba(255, 255, 255, 0.95)",
   WebkitBackgroundClip: "text",
   WebkitTextFillColor: "transparent",
   backgroundClip: "text",
@@ -141,10 +131,10 @@ export const globalStyles = `
   }
 
   body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
-      'Helvetica Neue', sans-serif;
+    font-family: 'Raleway', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background: #FFFDF8;
+    color: #18324C;
   }
 `
