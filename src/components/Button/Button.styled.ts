@@ -30,7 +30,7 @@ export const ButtonVariants = styled(ButtonBase, {
         paddingInline: espacamento,
         fontSize,
         overflow: "hidden",
-        fontFamily: '"Anybody", "Inter", sans-serif',
+        fontFamily: '"Raleway", "Inter", sans-serif',
         borderRadius: 8,
         fontWeight: 500,
         alignItems: "center",

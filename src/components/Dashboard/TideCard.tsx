@@ -1,4 +1,5 @@
 import { Box, Stack, Typography } from "@mui/material"
+import { ArrowDown, ArrowUp } from "lucide-react"
 
 interface TideCardProps {
   current?: string
@@ -17,13 +18,36 @@ export const TideCard = ({ current = "Enchendo", nextHigh = "14:30", nextLow = "
       </Box>
 
       <Stack direction="row" spacing={1}>
-        <Box sx={{ flex: 1, bgcolor: "#F8E9C9", p: 1.5, borderRadius: 2, textAlign: "center" }}>
-          <Typography sx={{ fontSize: 12 }}>Próxima maré alta</Typography>
+        <Box sx={{
+          flex: 1, bgcolor: "#F8E9C9", p: 1.5, borderRadius: 2, textAlign: "center",
+        }}>
+          <Box sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 0.5,
+          }}>
+            <Typography sx={{ fontSize: 12 }}>Próxima maré alta</Typography>
+
+            <ArrowUp size={18} />
+
+          </Box>
+
+
           <Typography sx={{ fontWeight: 700 }}>{nextHigh}</Typography>
         </Box>
         <Box sx={{ flex: 1, bgcolor: "#F8E9C9", p: 1.5, borderRadius: 2, textAlign: "center" }}>
-          <Typography sx={{ fontSize: 12 }}>Próxima maré baixa</Typography>
-          <Typography sx={{ fontWeight: 700 }}>{nextLow}</Typography>
+          <Box sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 0.5,
+          }}>
+            <Typography sx={{ fontSize: 12 }}>Próxima maré baixa</Typography>
+
+            <ArrowDown size={18} />
+
+          </Box>          <Typography sx={{ fontWeight: 700 }}>{nextLow}</Typography>
         </Box>
       </Stack>
     </Box>

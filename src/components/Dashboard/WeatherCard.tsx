@@ -9,7 +9,10 @@ interface WeatherCardProps {
 
 export const WeatherCard = ({ temp, label, subtitle }: WeatherCardProps) => {
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 1 }}>
+    
+    
+    <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 0.5 }}>
+
       <Box sx={{
         bgcolor: "transparent",
         borderRadius: 2,

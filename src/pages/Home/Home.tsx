@@ -39,7 +39,7 @@ export const Home = () => {
           <Waves size={34} />
         </Box>
 
-        <Typography variant="h2" sx={{ fontSize: { xs: "3.2rem", md: "4.8rem" } }}>
+        <Typography variant="h2" sx={{ fontSize: { xs: "3.2rem", md: "4.8rem" }}}>
           Sinta a liberdade das ondas
         </Typography>
 
@@ -82,11 +82,15 @@ export const Home = () => {
         </Grid>
       </Grid>
 
-      <Stack spacing={2.5}>
-        <Stack spacing={1} sx={{ maxWidth: 760 }}>
+      <Stack spacing={2.5} sx={{
+        alignItems: "center",
+        textAlign: "center",
+      }}>
+        <Stack spacing={1} sx={{ maxWidth: 760, }}>
           <Typography variant="h2" sx={{ fontSize: { xs: "2.9rem", md: "3.8rem" } }}>
             Previsão do tempo e mar
           </Typography>
+
 
           <Typography variant="subtitle1" color="text.secondary">
             Confira como está o tempo agora e nos próximos dias. Descubra o melhor momento para cair de cabeça no mar.
