@@ -3,20 +3,20 @@ import { globalStyles } from "@/components/Layout/Container.styles"
 
 export const useContainer = () => {
   useEffect(() => {
-    const styleId = "container-global-styles"
-    const existingStyle = document.getElementById(styleId)
+    const identificadorEstilo = "container-global-styles"
+    const estiloExistente = document.getElementById(identificadorEstilo)
 
-    if (!existingStyle) {
-      const style = document.createElement("style")
-      style.id = styleId
-      style.innerHTML = globalStyles
-      document.head.appendChild(style)
+    if (!estiloExistente) {
+      const estilo = document.createElement("style")
+      estilo.id = identificadorEstilo
+      estilo.innerHTML = globalStyles
+      document.head.appendChild(estilo)
     }
 
     return () => {
-      const style = document.getElementById(styleId)
-      if (style && style.parentNode) {
-        style.parentNode.removeChild(style)
+      const estilo = document.getElementById(identificadorEstilo)
+      if (estilo && estilo.parentNode) {
+        estilo.parentNode.removeChild(estilo)
       }
     }
   }, [])

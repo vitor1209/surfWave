@@ -1,7 +1,8 @@
-import { Stack, Typography } from "@mui/material";
-import * as styled from "./CardInfo.styled";
-import type { CardInfoProps } from "./CardInfo.types";
-import Link from '@mui/joy/Link';
+import Link from "@mui/joy/Link"
+import { Stack, Typography } from "@mui/material"
+
+import * as styled from "./CardInfo.styled"
+import type { CardInfoProps } from "./CardInfo.types"
 
 export default function CardInfo({
     name,
@@ -22,6 +23,7 @@ export default function CardInfo({
                 {tamanho === "lg" ? (
                     <Typography variant="h1"  >
 
+
                         {name}
                     </Typography>
                 ) : (
@@ -31,7 +33,7 @@ export default function CardInfo({
                         fontSize="1.4rem"
                         sx={{
                             justifyContent: "center",
-                            color: "#000",
+                            color: "#18324C",
                             textTransform: "uppercase",
                             letterSpacing: "0.08em",
                             textDecoration: "none",
@@ -44,17 +46,16 @@ export default function CardInfo({
                     </Link>
                 )}
 
-                <Typography variant="body1" >
-
+                <Typography variant="body1">
                     {valor}
                 </Typography>
 
                 {acrescimo ? (
-                    <Typography variant="h2" >
+                    <Typography variant="h2">
                         {acrescimo}
                     </Typography>
                 ) : null}
             </Stack>
         </styled.CardInfo>
-    );
+    )
 }

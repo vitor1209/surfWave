@@ -1,12 +1,12 @@
-// import { useState, useEffect } from "react";
-import { Box, Typography } from "@mui/material";
-import { useController, type Control, type FieldValues, type Path } from "react-hook-form";
+import { useEffect, useState, type ChangeEvent } from "react"
+import { Box, Typography } from "@mui/material"
+import { useController, type Control, type FieldValues, type Path } from "react-hook-form"
 
 type InputIMGProps<FormType extends FieldValues> = {
     name: Path<FormType>;
     label?: string;
     control: Control<FormType>;
-    defaultImage?: string; // URL inicial só para preview
+    defaultImage?: string;
     readOnly?: boolean;
     width?: number;
     height?: number;
@@ -16,7 +16,7 @@ export function InputImagem<FormType extends FieldValues>({
     name,
     label,
     control,
-    // defaultImage,
+    defaultImage,
     readOnly,
     width = 43,
     height = 31.563,
@@ -25,32 +25,41 @@ export function InputImagem<FormType extends FieldValues>({
     const { field } = useController({
         name,
         control,
-        defaultValue: undefined, // form recebe File | undefined
+        defaultValue: undefined,
     });
 
-    // const [preview, setPreview] = useState<string | null>(defaultImage || null);
+    const [preview, setPreview] = useState<string | null>(defaultImage ?? null)
 
-//     useEffect(() => {
-//     if (field.value && typeof field.value === "object" && "name" in field.value && "size" in field.value) {
-//         // é um File
-//         setPreview(URL.createObjectURL(field.value as File));
-//     } else if (typeof field.value === "string") {
-//         // é uma URL
-//         setPreview(field.value);
-//     } else {
-//         setPreview(defaultImage ?? null);
-//     }
-// }, [field.value, defaultImage]);
+    useEffect(() => {
+        if (
+            typeof field.value === "object" &&
+            field.value !== null &&
+            "name" in field.value &&
+            "size" in field.value
+        ) {
+            const arquivo = field.value as File
+            const urlPreview = URL.createObjectURL(arquivo)
+            setPreview(urlPreview)
 
-
-    const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        if (readOnly) return;
-
-        const file = event.target.files?.[0];
-        if (file) {
-            field.onChange(file); // envia File para o form
+            return () => URL.revokeObjectURL(urlPreview)
         }
-    };
+
+        if (typeof field.value === "string") {
+            setPreview(field.value)
+            return
+        }
+
+        setPreview(defaultImage ?? null)
+    }, [defaultImage, field.value])
+
+    const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
+        if (readOnly) return
+
+        const file = event.target.files?.[0]
+        if (file) {
+            field.onChange(file)
+        }
+    }
 
     return (
         <Box>
@@ -91,12 +100,10 @@ export function InputImagem<FormType extends FieldValues>({
                         type="file"
                         accept="image/*"
                         hidden
-                        // name={field.name}
-                        // ref={field.ref}
                         onChange={handleImageChange}
                     />
                 )}
             </Box>
         </Box>
-    );
+    )
 }

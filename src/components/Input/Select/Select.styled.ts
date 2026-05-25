@@ -41,7 +41,6 @@ export const SelectInput = styled(Select)<
         borderRadius: 8,
     },
 
-    // Centraliza e aumenta a seta
     "& .MuiSelect-icon": {
         top: "50%",
         transform: "translateY(-50%)",
@@ -68,7 +67,6 @@ export const SelectInput = styled(Select)<
         padding: "4px 0",
     },
 
-    // Bordas inferiores no estilo do InputForm
     "&.MuiInput-root::before": {
         borderBottom: "1px solid #000",
     },

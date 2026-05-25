@@ -4,12 +4,9 @@ import Chip from '@mui/joy/Chip';
 import Typography from '@mui/joy/Typography';
 import * as Styled from "./Card.styled.ts";
 import { Button } from "../../components/Button/Button";
-import { ShoppingCart, Trash2, Pencil, CheckCircle } from 'lucide-react';
+import { ShoppingCart, Trash2, Pencil } from 'lucide-react';
 import type { CardProps } from "./Card.types.ts";
 import { Box, Stack } from '@mui/material';
-import { useState } from 'react';
-import { PadraoModal } from '../Modal/Modal.tsx';
-// import { useNavigate as useNavigate } from "react-router-dom";
 import Link from '@mui/joy/Link';
 import { Person } from '@mui/icons-material';
 
@@ -24,38 +21,9 @@ export default function ProductCard({
     tipoCard,
     onReserve,
 }: CardProps) {
-    // const navigate = useNavigate();
+    const ehCardDeProduto = tipoCard === "Produto" || tipoCard === "semLogin";
 
-    // const { handleAdd, modalMessage, modalOpen, setModalOpen } = useAddCarrinho();
-
-    // const handleAdicionarCarrinho = () => {
-    //     handleAdd({
-    //         produto_id: id,
-    //         quantidade: 1,
-    //     });
-    // };
-
-    // const handleEdit = () => {
-    //     navigate(`/EditarProdutoPage/${id}`);
-    // };
-
-    const [openModal, setOpenModal] = useState(false);
-    // const deleteMutation = useDeleteProduto();
-
-    // function handleDelete() {
-    //     deleteMutation.mutate(id, {
-    //         onSuccess: () => {
-    //             setOpenModal(true);
-    //         },
-    //         onError: () => {
-    //             setOpenModal(true);
-    //         }
-    //     });
-    // }
-
-    const isProductCard = tipoCard === "Produto" || tipoCard === "semLogin";
-
-    const renderByType = () => {
+    const renderizarPorTipo = () => {
         switch (tipoCard) {
             case "Horta":
                 return (
@@ -81,7 +49,6 @@ export default function ProductCard({
                             variante="ButtonLinkRed"
                             icon={Trash2}
                             tamanho="xl"
-                            // onClick={handleDelete}
                         />
                     </Box>
                 );
@@ -119,7 +86,7 @@ export default function ProductCard({
         }
     };
 
-    const formattedPrice =
+    const precoFormatado =
         typeof preco === "number" ? preco.toFixed(0) : preco;
 
     return (
@@ -140,7 +107,7 @@ export default function ProductCard({
                     </Stack>
                 </CardOverflow>
 
-                {isProductCard ? (
+                {ehCardDeProduto ? (
                     <CardContent className="productContent">
                         <Typography className="productTag" level="body-xs">
                             {String(lugar).toUpperCase()}
@@ -167,7 +134,7 @@ export default function ProductCard({
 
                         <div className="productFooter">
                             <Typography className="productPrice" level="title-lg">
-                                R${formattedPrice}
+                                R${precoFormatado}
                                 <span>/dia</span>
                             </Typography>
 
@@ -249,28 +216,8 @@ export default function ProductCard({
                     </CardContent>
                 )}
 
-                {!isProductCard && renderByType()}
+                {!ehCardDeProduto && renderizarPorTipo()}
             </Styled.ProductCardStyled>
-            <PadraoModal
-                open={openModal}
-                onClose={() => setOpenModal(false)}
-                title="Produto removido!"
-                description="Seu produto foi deletado com sucesso."
-                buttonText="Concluir"
-                Icon={CheckCircle}
-                to="/HomeProdutor"
-                color="#dc2626"
-            />
-
-            {/* <PadraoModal
-                open={setModalOpen}
-                onClose={() => setModalOpen(false)}
-                title="Carrinho"
-                // description={modalMessage ?? ""}
-                buttonText="Concluir"
-                to="/HomeConsumidor"
-                Icon={CheckCircle}
-            /> */}
         </>
     );
 }

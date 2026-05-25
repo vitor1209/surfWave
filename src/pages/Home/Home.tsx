@@ -1,48 +1,100 @@
 import { Button } from "@/components/Button/Button"
 import CardInfo from "@/components/cardInfo/CardInfo"
 import { Dashboard } from "@/components/Dashboard/Dashboard"
-import { Container, Stack, Typography } from "@mui/material"
-import { Book, Clock, Heart } from "lucide-react"
+import { Box, Container, Grid, Stack, Typography } from "@mui/material"
+import { Book, Clock, Heart, Waves } from "lucide-react"
 
 export const Home = () => {
 
   return (
-    <Container maxWidth="md" sx={{ py: 8, alignItems: 'center', justifyContent: 'center', display: 'flex', flexDirection: 'column', gap: 10 }}>
+    <Container
+      maxWidth="lg"
+      sx={{
+        py: { xs: 5, md: 8 },
+        display: "flex",
+        flexDirection: "column",
+        gap: { xs: 6, md: 10 },
+      }}
+    >
+      <Stack
+        spacing={2}
+        sx={{
+          alignItems: "center",
+          textAlign: "center",
+          mx: "auto",
+          maxWidth: 820,
+        }}
+      >
+        <Box
+          sx={{
+            width: 72,
+            height: 72,
+            borderRadius: "50%",
+            display: "grid",
+            placeItems: "center",
+            background: "linear-gradient(135deg, rgba(45, 108, 223, 0.16), rgba(24, 75, 155, 0.16))",
+            color: "primary.main",
+          }}
+        >
+          <Waves size={34} />
+        </Box>
 
-      <Stack spacing={1.5} sx={{ alignItems: 'center', textAlign: 'center', width: '80%' }}>
-
-        <Typography variant="h2" >
-          Sinta a Liberdade das Ondas
+        <Typography variant="h2" sx={{ fontSize: { xs: "3.2rem", md: "4.8rem" } }}>
+          Sinta a liberdade das ondas
         </Typography>
 
-        <Typography variant="subtitle1" color="text.secondary">
-          Venha descobrir a magia do surf. Das suas primeiras remadas até pegar seu primeiro tubo, estamos aqui para guiar sua jornada nas ondas.
+        <Typography variant="subtitle1" color="text.secondary" sx={{ maxWidth: 680 }}>
+          Venha descobrir a magia do surf. Das primeiras remadas ao primeiro tubo, estamos aqui para guiar sua jornada com aulas, aluguel e experiências na praia.
         </Typography>
 
-        <Button tamanho="lg" espacamento={20} >
-          Comece Agora
+        <Button tamanho="lg" espacamento={24} icon={Book}>
+          Comece agora
         </Button>
-
       </Stack>
 
+      <Grid container spacing={3} sx={{ justifyContent: "center" }}>
+        <Grid size={{ xs: 12, md: 4 }}>
+          <CardInfo
+            color="blue"
+            icon={Book}
+            name="Agendamento de aulas"
+            tamanho="md"
+            valor="Do iniciante ao avançado, com acompanhamento pensado para cada fase."
+          />
+        </Grid>
+        <Grid size={{ xs: 12, md: 4 }}>
+          <CardInfo
+            color="green"
+            icon={Clock}
+            name="Horários flexíveis"
+            tamanho="md"
+            valor="Escolha o melhor horário para aproveitar o mar sem complicação."
+          />
+        </Grid>
+        <Grid size={{ xs: 12, md: 4 }}>
+          <CardInfo
+            color="orange"
+            icon={Heart}
+            name="Comunidade ativa"
+            tamanho="md"
+            valor="Conecte-se com pessoas que compartilham a mesma energia do surf."
+          />
+        </Grid>
+      </Grid>
 
-      <Stack direction={'row'} spacing={4}>
-        <CardInfo color="blue" icon={Book} name="Agendamento de aulas" tamanho="md" valor="Do iniciante ao avançado, temos o programa perfeito para você." />
-        <CardInfo color="blue" icon={Clock} name="Horários flexíveis" tamanho="md" valor="Do iniciante ao avançado, temos o programa perfeito para você." />
-        <CardInfo color="blue" icon={Heart} name="Comunidade Ativa" tamanho="md" valor="Do iniciante ao avançado, temos o programa perfeito para você." />
-      </Stack>
+      <Stack spacing={2.5}>
+        <Stack spacing={1} sx={{ maxWidth: 760 }}>
+          <Typography variant="h2" sx={{ fontSize: { xs: "2.9rem", md: "3.8rem" } }}>
+            Previsão do tempo e mar
+          </Typography>
 
-      <Stack sx={{ gap: 4 }}>
-        <Typography variant="h2" align="center">
-          Previsão do tempo e mar
-        </Typography>
 
-        <Typography variant="subtitle1" color="text.secondary">
-          Confira como está o tempo agora e nos próximos dias. Descubra o melhor momento pra cair de cabeça no mar!
-        </Typography>
+          <Typography variant="subtitle1" color="text.secondary">
+            Confira como está o tempo agora e nos próximos dias. Descubra o melhor momento para cair de cabeça no mar.
+          </Typography>
+        </Stack>
 
         <Dashboard />
-
       </Stack>
     </Container>
   )

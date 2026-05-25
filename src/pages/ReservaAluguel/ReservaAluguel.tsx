@@ -68,7 +68,6 @@ export const ReservaAluguel = () => {
             justifyContent: "space-evenly",
           }}
         >
-          {/* Product card on the left */}
           <Card
             sx={{
               width: { xs: "10%", md: 320 },
@@ -123,7 +122,6 @@ export const ReservaAluguel = () => {
             </Stack>
           </Card>
 
-          {/* Inclui card - placed visually below (behind) */}
           <Card
             sx={{
               flex: 4,
@@ -177,7 +175,6 @@ export const ReservaAluguel = () => {
           </Card>
         </Stack>
 
-        {/* Condicoes card - overlapping on top/right */}
         <Card
           sx={{
             position: { xs: "static", md: "absolute" },

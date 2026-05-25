@@ -1,7 +1,7 @@
 import React from "react"
 import { Modal, Stack } from "@mui/material"
 import { CheckCircle } from "lucide-react"
-import type { ModalProps } from ".//Modal.types"
+import type { ModalProps } from "./Modal.types"
 import * as styled from "./Modal.styled"
 import { Button } from "../Button/Button"
 import Typography from "@mui/joy/Typography"

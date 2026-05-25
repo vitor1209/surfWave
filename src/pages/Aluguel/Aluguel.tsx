@@ -14,17 +14,17 @@ import ProductCard from "@/components/Card/Card"
 
 export const Aluguel = () => {
   const {
-    search,
-    setSearch,
+    busca,
+    setBusca,
 
-    activeCategory,
-    setActiveCategory,
+    categoriaAtiva,
+    setCategoriaAtiva,
 
-    filteredEquipment,
+    equipamentosFiltrados,
 
     categories,
 
-    handleReserve,
+    handleReservar,
   } = useAluguel()
 
   return (
@@ -34,17 +34,20 @@ export const Aluguel = () => {
         py: 6,
       }}
     >
-      <Stack spacing={4} sx={{
-        py: 6,
-        alignItems:"center",
-        justifyContent:"center",
-      }}>
+      <Stack
+        spacing={4}
+        sx={{
+          py: 6,
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         <TextField
           fullWidth
           placeholder="Buscar equipamentos..."
           variant="outlined"
-          value={search}
-          onChange={(event) => setSearch(event.target.value)}
+          value={busca}
+          onChange={(event) => setBusca(event.target.value)}
           slotProps={{
             input: {
               startAdornment: (
@@ -52,7 +55,7 @@ export const Aluguel = () => {
                   size={20}
                   style={{
                     marginRight: 12,
-                    color: "#9ca3af",
+                    color: "#52697F",
                   }}
                 />
               ),
@@ -60,11 +63,11 @@ export const Aluguel = () => {
           }}
           sx={{
             mx: "auto",
-            maxWidth:"80%",
+            maxWidth: "80%",
 
             "& .MuiOutlinedInput-root": {
-              borderRadius: "12px",
-              backgroundColor: "rgba(0, 0, 0, 0.05)",
+              borderRadius: "16px",
+              backgroundColor: "rgba(24, 50, 76, 0.04)",
             },
           }}
         />
@@ -82,27 +85,27 @@ export const Aluguel = () => {
             <Button
               key={category.id}
               variant={
-                activeCategory === category.id
+                categoriaAtiva === category.id
                   ? "contained"
                   : "outlined"
               }
-              onClick={() => setActiveCategory(category.id)}
+              onClick={() => setCategoriaAtiva(category.id)}
               sx={{
                 fontWeight: 600,
                 textTransform: "none",
-                borderRadius: "15px",
+                borderRadius: "999px",
 
-                borderColor: "#2563eb",
+                borderColor: "primary.main",
 
                 backgroundColor:
-                  activeCategory === category.id
-                    ? "#2563eb"
+                  categoriaAtiva === category.id
+                    ? "primary.main"
                     : "transparent",
 
                 color:
-                  activeCategory === category.id
+                  categoriaAtiva === category.id
                     ? "#fff"
-                    : "#2563eb",
+                    : "primary.main",
               }}
             >
               {category.label}
@@ -111,10 +114,10 @@ export const Aluguel = () => {
         </Stack>
 
         <Grid container spacing={3}>
-          {filteredEquipment.length > 0 ? (
-            filteredEquipment.map((equipment) => (
+          {equipamentosFiltrados.length > 0 ? (
+            equipamentosFiltrados.map((equipamento) => (
               <Grid
-                key={equipment.id}
+                key={equipamento.id}
                 size={{
                   xs: 12,
                   sm: 6,
@@ -122,14 +125,14 @@ export const Aluguel = () => {
                 }}
               >
                 <ProductCard
-                  image={equipment.image}
-                  id={equipment.id}
-                  name={equipment.name}
-                  lugar={equipment.label}
-                  descricao={equipment.description}
-                  preco={equipment.price}
+                  image={equipamento.image}
+                  id={equipamento.id}
+                  name={equipamento.name}
+                  lugar={equipamento.label}
+                  descricao={equipamento.description}
+                  preco={equipamento.price}
                   tipoCard="Produto"
-                  onReserve={handleReserve}
+                  onReserve={handleReservar}
                 />
               </Grid>
             ))

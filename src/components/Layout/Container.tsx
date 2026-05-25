@@ -18,6 +18,13 @@ import { Button } from "../Button/Button"
 const MotionBox = motion.create(Box)
 const MotionSvg = motion.create("svg")
 
+const navegacaoPrincipal = [
+  { label: "Início", to: "/" },
+  { label: "Aulas", to: "/aulas" },
+  { label: "Aluguel", to: "/aluguel" },
+  { label: "Galeria", to: "/galeria" },
+]
+
 const Wave = ({ delay, duration }: { delay: number; duration: number }) => (
   <MotionSvg
     viewBox="0 0 1200 120"
@@ -47,7 +54,7 @@ const Wave = ({ delay, duration }: { delay: number; duration: number }) => (
 export const Container = ({ title, subtitle, children }: ContainerProps) => {
   useContainer()
 
-  const containerVariants: Variants = {
+  const variacaoContainer: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -58,7 +65,7 @@ export const Container = ({ title, subtitle, children }: ContainerProps) => {
     },
   }
 
-  const itemVariants: Variants = {
+  const variacaoItem: Variants = {
     hidden: {
       opacity: 0,
       y: 20,
@@ -88,22 +95,12 @@ export const Container = ({ title, subtitle, children }: ContainerProps) => {
           </Stack>
         }
       >
-        <>
-          <Button variante="ButtonLinkWhite" tamanho="sm" to="/">
-            Início
+        {navegacaoPrincipal.map((item) => (
+          <Button key={item.to} variante="ButtonLinkWhite" tamanho="sm" to={item.to}>
+            {item.label}
           </Button>
-          <Button variante="ButtonLinkWhite" tamanho="sm" to="/aulas">
-            Aulas
-          </Button>
-          <Button variante="ButtonLinkWhite" tamanho="sm" to="/aluguel">
-            Aluguel
-          </Button>
-          <Button variante="ButtonLinkWhite" tamanho="sm" to="/galeria">
-            Galeria
-          </Button>
-        </>
+        ))}
       </Header>
-      {/* Header Section */}
       <Box component="header" sx={headerSx}>
         <MotionBox
           sx={headerContentSx}
@@ -139,7 +136,6 @@ export const Container = ({ title, subtitle, children }: ContainerProps) => {
           </motion.p>
         </MotionBox>
 
-        {/* Animated Waves */}
         <Box sx={waveContainerSx}>
           <Wave delay={0} duration={15} />
           <Wave delay={-7.5} duration={15} />
@@ -147,15 +143,14 @@ export const Container = ({ title, subtitle, children }: ContainerProps) => {
         </Box>
       </Box>
 
-      {/* Content Section */}
       <Box component="section" sx={contentAreaSx}>
         <motion.div
           initial="hidden"
           animate="visible"
-          variants={containerVariants}
+          variants={variacaoContainer}
           style={{ width: "100%", height: "100%" }}
         >
-          <motion.div variants={itemVariants}>
+          <motion.div variants={variacaoItem}>
             <Box sx={{ width: "100%", height: "100%" }}>
               {children}
             </Box>
@@ -163,7 +158,6 @@ export const Container = ({ title, subtitle, children }: ContainerProps) => {
         </motion.div>
       </Box>
 
-      {/* Footer */}
       <Footer />
     </Stack>
   )

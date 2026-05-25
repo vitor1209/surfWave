@@ -14,7 +14,7 @@ export const ProductCardStyled = styled(Card)<{ tipoCard?: string }>(({ tipoCard
     border: "1px solid rgba(0,0,0,0.08)",
     backgroundColor: "#fff",
     transition: "transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out",
-    position: "relative", // para o link
+    position: "relative",
 
     "&:hover": {
         transform: "translateY(-4px)",
