@@ -13,8 +13,8 @@ export const AppRoutes = () => {
         path="/"
         element={
           <Container
-            title="Bem-vindo"
-            subtitle="Estrutura inicial da aplicação"
+            title="Domine as ondas"
+            subtitle="Sua aventura no surf começa aqui. Conheça nosso site!"
           >
             <Home />
           </Container>

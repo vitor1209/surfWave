@@ -27,6 +27,7 @@ export const titleSx: SxProps<Theme> = {
     sm: "3.75rem",
     md: "5rem",
   },
+  fontFamily: '"Amatica SC", cursive',
   fontWeight: 300,
   letterSpacing: "0.12em",
   mb: 1,
@@ -40,10 +41,11 @@ export const subtitleSx: SxProps<Theme> = {
     sm: "1.05rem",
     md: "1.1rem",
   },
-  fontWeight: 400,
+    fontFamily: '"Raleway", sans-serif',
+  fontWeight: "200 !important",
   letterSpacing: "0.1em",
   color: "rgba(255, 255, 255, 0.9)",
-  textTransform: "uppercase",
+  // textTransform: "uppercase",
   animation: "fadeInUp 0.8s ease-in-out 0.2s both",
 }
 

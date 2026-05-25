@@ -27,7 +27,7 @@ export const SeaConditions = ({
         <Box
             sx={{
                 p: 3,
-                borderRadius: 4,
+                borderRadius: 2,
                 backgroundColor: "#FFF8EE",
                 border: "1px solid rgba(0,0,0,0.06)",
                 backdropFilter: "blur(12px)",
