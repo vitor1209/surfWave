@@ -1,7 +1,9 @@
 import { Box, Stack } from "@mui/material"
 import { motion, type Variants } from "framer-motion"
+
 import { useContainer } from "@/components/Layout/Container.hook"
 import { Footer } from "@/components/Footer"
+
 import {
   headerSx,
   headerContentSx,
@@ -11,7 +13,9 @@ import {
   contentAreaSx,
   headerBrandSx,
 } from "@/components/Layout/Container.styles"
+
 import type { ContainerProps } from "@/components/Layout/Container.types"
+
 import { Header } from "../Header/Header"
 import { Button } from "../Button/Button"
 
@@ -25,9 +29,15 @@ const navegacaoPrincipal = [
   { label: "Galeria", to: "/galeria" },
 ]
 
-const Wave = ({ delay, duration }: { delay: number; duration: number }) => (
+const Wave = ({
+  delay,
+  duration,
+}: {
+  delay: number
+  duration: number
+}) => (
   <MotionSvg
-    viewBox="0 0 1200 120"
+    viewBox="0 0 1440 320"
     preserveAspectRatio="none"
     style={{
       position: "absolute",
@@ -35,10 +45,9 @@ const Wave = ({ delay, duration }: { delay: number; duration: number }) => (
       left: 0,
       width: "200%",
       height: "100%",
-      fill: "#F5E6D3",
     }}
     animate={{
-      x: [0, -600],
+      x: [0, -720],
     }}
     transition={{
       duration,
@@ -47,11 +56,27 @@ const Wave = ({ delay, duration }: { delay: number; duration: number }) => (
       delay,
     }}
   >
-    <path d="M0,50 Q300,0 600,50 T1200,50 L1200,120 L0,120 Z" />
+    <path
+      fill="#F5E6D3"
+      d="
+        M0,224
+        C120,192 240,160 360,170
+        C480,180 600,240 720,245
+        C840,250 960,200 1080,186
+        C1200,172 1320,194 1440,218
+        L1440,320
+        L0,320
+        Z
+      "
+    />
   </MotionSvg>
 )
 
-export const Container = ({ title, subtitle, children }: ContainerProps) => {
+export const Container = ({
+  title,
+  subtitle,
+  children,
+}: ContainerProps) => {
   useContainer()
 
   const variacaoContainer: Variants = {
@@ -87,20 +112,27 @@ export const Container = ({ title, subtitle, children }: ContainerProps) => {
         flexDirection: "column",
       }}
     >
-
       <Header
         start={
           <Stack direction="row" spacing={3}>
-            <Box sx={headerBrandSx}>SurfWave</Box>
+            <Box sx={headerBrandSx}>
+              SurfWave
+            </Box>
           </Stack>
         }
       >
         {navegacaoPrincipal.map((item) => (
-          <Button key={item.to} variante="ButtonLinkWhite" tamanho="sm" to={item.to}>
+          <Button
+            key={item.to}
+            variante="ButtonLinkWhite"
+            tamanho="sm"
+            to={item.to}
+          >
             {item.label}
           </Button>
         ))}
       </Header>
+
       <Box component="header" sx={headerSx}>
         <MotionBox
           sx={headerContentSx}
@@ -115,12 +147,16 @@ export const Container = ({ title, subtitle, children }: ContainerProps) => {
             }}
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
+            transition={{
+              duration: 0.6,
+              ease: "easeOut",
+            }}
           >
             <Box component="span" sx={titleSx}>
               {title}
             </Box>
           </motion.h1>
+
           <motion.p
             style={{
               margin: 0,
@@ -128,7 +164,11 @@ export const Container = ({ title, subtitle, children }: ContainerProps) => {
             }}
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+            transition={{
+              duration: 0.6,
+              delay: 0.2,
+              ease: "easeOut",
+            }}
           >
             <Box component="span" sx={subtitleSx}>
               {subtitle}
@@ -137,9 +177,7 @@ export const Container = ({ title, subtitle, children }: ContainerProps) => {
         </MotionBox>
 
         <Box sx={waveContainerSx}>
-          <Wave delay={0} duration={15} />
-          <Wave delay={-7.5} duration={15} />
-          <Wave delay={-3} duration={20} />
+          <Wave delay={0} duration={18} />
         </Box>
       </Box>
 
@@ -148,10 +186,18 @@ export const Container = ({ title, subtitle, children }: ContainerProps) => {
           initial="hidden"
           animate="visible"
           variants={variacaoContainer}
-          style={{ width: "100%", height: "100%" }}
+          style={{
+            width: "100%",
+            height: "100%",
+          }}
         >
           <motion.div variants={variacaoItem}>
-            <Box sx={{ width: "100%", height: "100%" }}>
+            <Box
+              sx={{
+                width: "100%",
+                height: "100%",
+              }}
+            >
               {children}
             </Box>
           </motion.div>
