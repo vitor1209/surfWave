@@ -2,12 +2,12 @@ import type { LessonType } from "./FormAula.types"
 
 export const styles = {
   section: {
-    className: "relative py-20 px-4 md:px-8",
+    className: "relative py-6 px-4 md:px-8",
   },
-  
+
   container: "max-w-7xl mx-auto",
   grid: "grid grid-cols-1 lg:grid-cols-2 gap-8",
-  
+
   header: {
     wrapper: "text-center mb-12",
     badge: {
@@ -18,17 +18,29 @@ export const styles = {
     title: { className: "text-3xl md:text-5xl font-bold mb-4 text-balance", color: "oklch(0.2 0.03 230)" },
     subtitle: { className: "text-lg max-w-2xl mx-auto text-pretty", color: "oklch(0.4 0.05 220)" }
   },
-  
+
   lessonCard: {
-    base: "relative p-6 rounded-2xl cursor-pointer transition-all duration-300",
-    active: { background: "white", boxShadow: "0 8px 30px rgba(0,0,0,0.12)" },
-    inactive: { background: "oklch(0.98 0.01 85 / 0.5)", boxShadow: "none" },
+    base: {
+      p: 6,
+      borderRadius: "24px",
+      cursor: "pointer",
+      transition: "all 0.35s cubic-bezier(0.4, 0, 0.2, 1)",
+      willChange: "transform, box-shadow, background",
+    },
+    active: {
+      background: "white", boxShadow: "0 8px 30px rgba(0,0,0,0.12)", transform: "scale(1.02)",
+    },
+    inactive: {
+      background: "rgba(255, 255, 255, 0.35)",
+      backdropFilter: "blur(8px)",
+      boxShadow: "0 2px 10px rgba(0,0,0,0.05)",
+    },
     title: { className: "text-lg font-bold", color: "oklch(0.2 0.03 230)" },
     description: { className: "text-sm mb-4", color: "oklch(0.45 0.04 220)" },
     price: { className: "text-2xl font-bold" },
     duration: { className: "block text-xs", color: "oklch(0.5 0.04 220)" }
   },
-  
+
   bookingForm: {
     wrapper: { className: "p-8 rounded-2xl", background: "white", boxShadow: "0 8px 30px rgba(0,0,0,0.1)" },
     title: { className: "text-xl font-bold mb-6", color: "oklch(0.25 0.04 220)" },
@@ -42,9 +54,9 @@ export const styles = {
 } as const
 
 export const colors = {
-  teal: "oklch(0.65 0.18 180)",
-  blue: "oklch(0.55 0.15 220)",
-  orange: "oklch(0.7 0.18 50)"
+  teal: "#199058",
+  blue: "#2057b3",
+  orange: "#dc791b"
 } as const
 
 export const weekDays = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sab", "Dom"]

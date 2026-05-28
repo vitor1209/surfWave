@@ -50,7 +50,7 @@ export const ReservaAluguel = () => {
     <Box
       sx={{
         backgroundColor: "#6ea2f7",
-        borderRadius: 6,
+        borderRadius: 2,
         px: { xs: 3, md: 6 },
         py: { xs: 4, md: 6 },
         minHeight: { xs: "auto", md: 520 },
@@ -70,17 +70,18 @@ export const ReservaAluguel = () => {
         >
           <Card
             sx={{
-              width: { xs: "10%", md: 320 },
-              borderRadius: 4,
+              width: { xs: "10%", md: 380 },
+              borderRadius: 1.5,
               overflow: "hidden",
               boxShadow: "0 16px 30px rgba(0,0,0,0.18)",
               zIndex: 3,
+              fontFamily: '"Raleway", sans-serif',
             }}
           >
             <Box
               sx={{
                 backgroundColor: "#d9d9d9",
-                height: 200,
+                height: 240,
               }}
             />
 
@@ -91,6 +92,7 @@ export const ReservaAluguel = () => {
                   color: "#7ca6ff",
                   letterSpacing: "0.08em",
                   fontWeight: 700,
+                  fontFamily: '"Raleway", sans-serif',
                 }}
               >
                 {equipment.label.toUpperCase()}
@@ -98,14 +100,14 @@ export const ReservaAluguel = () => {
 
               <Typography
                 variant="h6"
-                sx={{ fontWeight: 700 }}
+                sx={{ fontWeight: 700, fontFamily: '"Raleway", sans-serif', }}
               >
                 {equipment.name}
               </Typography>
 
               <Typography
                 variant="body2"
-                sx={{ color: "text.secondary" }}
+                sx={{ color: "text.secondary", fontFamily: '"Raleway", sans-serif', }}
               >
                 {equipment.description}
               </Typography>
@@ -115,6 +117,7 @@ export const ReservaAluguel = () => {
                 sx={{
                   color: "#3b6edc",
                   fontWeight: 700,
+                  fontFamily: '"Raleway", sans-serif',
                 }}
               >
                 R${equipment.price}/dia
@@ -127,12 +130,13 @@ export const ReservaAluguel = () => {
               flex: 4,
               minWidth: { xs: "100%", md: 360 },
               maxWidth: { xs: "100%", md: 550 },
-              borderRadius: 4,
+              borderRadius: 1.5,
               p: 3,
               margin: { xs: 0, md: -800 },
               boxShadow: "0 16px 30px rgba(0,0,0,0.18)",
               transform: { xs: "none", md: "translateY(36px)" },
               zIndex: 1,
+              fontFamily: '"Raleway", sans-serif',
             }}
           >
             <Typography
@@ -141,6 +145,7 @@ export const ReservaAluguel = () => {
                 textAlign: "center",
                 fontWeight: 700,
                 mb: 2,
+                fontFamily: '"Raleway", sans-serif',
               }}
             >
               Inclui
@@ -181,12 +186,13 @@ export const ReservaAluguel = () => {
             right: { md: 20 },
             top: { md: 230 },
             width: { xs: "100%", md: 340 },
-            borderRadius: 4,
+            borderRadius: 1.5,
             p: 3,
             backgroundColor: "#cfe9ec",
             boxShadow: "0 16px 30px rgba(0,0,0,0.18)",
             zIndex: 4,
             marginTop: { xs: 2, md: 0 },
+            fontFamily: '"Raleway", sans-serif',
           }}
         >
           <Stack
@@ -210,7 +216,7 @@ export const ReservaAluguel = () => {
             >
               <Info size={18} />
             </Box>
-            <Typography variant="h6" sx={{ fontWeight: 700 }}>
+            <Typography variant="h6" sx={{ fontWeight: 700, fontFamily: '"Raleway", sans-serif', }}>
               Condicoes do aluguel
             </Typography>
           </Stack>

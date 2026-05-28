@@ -10,6 +10,30 @@ import {
 } from "./Aluguel.types"
 
 faker.seed(42)
+const imagensEquipamentos = {
+  pranchas: [
+    "/images/prancha1.jpg",
+    "/images/prancha2.jpg",
+    "/images/prancha3.jpg",
+  ],
+
+  roupas: [
+    "/images/wetsuit1.jpg",
+    "/images/wetsuit2.jpg",
+    "/images/wetsuit3.jpg",
+  ],
+
+  acessorios: [
+    "/images/acessorio1.jpg",
+    "/images/acessorio2.jpg",
+    "/images/acessorio3.jpg",
+  ],
+  praia: [
+  "/images/praia1.jpg",
+  "/images/cadeira.jpg",
+  "/images/cooler.jpg",
+],
+}
 
 const nomesEquipamentos = {
   pranchas: [
@@ -29,6 +53,11 @@ const nomesEquipamentos = {
     "Lycra UV Protection",
     "Prancha Soft Top Iniciante",
   ],
+  praia: [
+  "Guarda-sol Premium",
+  "Cadeira de Praia Reclinável",
+  "Cooler Térmico",
+],
 }
 
 const categories: CategoryFilter[] = [
@@ -50,6 +79,10 @@ const categories: CategoryFilter[] = [
   {
     id: EquipmentCategory.ACESSORIOS,
     label: "Acessórios",
+  },
+  {
+   id: EquipmentCategory.PRAIA,
+    label: "Praia",
   },
 ]
 
@@ -89,10 +122,10 @@ const criarEquipamentos = (): RentalEquipment[] => {
           max: 100,
         }),
 
-        image: faker.image.urlPicsumPhotos({
-          width: 300,
-          height: 300,
-        }),
+        image:
+          imagensEquipamentos[
+          category as keyof typeof imagensEquipamentos
+          ][names.indexOf(name)],
 
         label: category.charAt(0).toUpperCase() + category.slice(1),
         includes: faker.helpers
