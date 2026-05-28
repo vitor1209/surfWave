@@ -1,4 +1,4 @@
-import Grid from "@mui/material/Grid"
+// import Grid from "@mui/material/Grid"
 
 import {
   Box,
@@ -7,11 +7,13 @@ import {
   Typography,
 } from "@mui/material"
 
-import { LevelCard } from "@/components/LevelCard"
-import { SchedulingForm } from "@/components/SchedulingForm"
+// import { LevelCard } from "@/components/LevelCard"
+// import { SchedulingForm } from "@/components/SchedulingForm"
 
 import { useAulas } from "./Aulas.hook"
-import { LEVELS_DATA } from "./Aulas.utils"
+// import { LEVELS_DATA } from "./Aulas.utils"
+import { FormAula } from "@/components/FormAula/FormAula"
+// import { LessonsSchedule } from "@/components/LessonScheduel"
 
 export const Aulas = () => {
   const {
@@ -35,7 +37,7 @@ export const Aulas = () => {
         py: 4,
       }}
     >
-      <Grid container spacing={4}>
+      {/* <Grid container spacing={4}>
         <Grid
           size={{
             xs: 12,
@@ -125,7 +127,12 @@ export const Aulas = () => {
             )}
           </Box>
         </Grid>
-      </Grid>
+      </Grid> */}
+      <Stack> 
+              <FormAula />
+
+
+      </Stack>
     </Container>
   )
 }

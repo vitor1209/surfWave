@@ -41,11 +41,10 @@ export const subtitleSx: SxProps<Theme> = {
     sm: "1.05rem",
     md: "1.1rem",
   },
-    fontFamily: '"Raleway", sans-serif',
+  fontFamily: '"Raleway", sans-serif',
   fontWeight: "200 !important",
   letterSpacing: "0.1em",
   color: "rgba(255, 255, 255, 0.9)",
-  // textTransform: "uppercase",
   animation: "fadeInUp 0.8s ease-in-out 0.2s both",
 }
 
@@ -55,7 +54,7 @@ export const waveContainerSx: SxProps<Theme> = {
   left: 0,
   right: 0,
   width: "100%",
-  height: "120px",
+  height: "180px",
   overflow: "hidden",
   zIndex: 1,
 }
