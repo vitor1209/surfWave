@@ -5,6 +5,7 @@ export const EquipmentCategory = {
   PRANCHAS: "pranchas",
   ROUPAS: "roupas",
   ACESSORIOS: "acessorios",
+  PRAIA: "praia",
 } as const
 
 export type EquipmentCategory =

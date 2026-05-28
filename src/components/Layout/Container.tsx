@@ -29,47 +29,53 @@ const navegacaoPrincipal = [
   { label: "Galeria", to: "/galeria" },
 ]
 
-const Wave = ({
-  delay,
-  duration,
-}: {
-  delay: number
-  duration: number
-}) => (
-  <MotionSvg
-    viewBox="0 0 1440 320"
-    preserveAspectRatio="none"
+const Wave = ({ duration = 8, opacity = 1, offset = 0 }: any) => (
+  <motion.div
     style={{
       position: "absolute",
-      bottom: 0,
+      bottom: -1, // 👈 mata a linha feia
       left: 0,
-      width: "200%",
+      width: "100%",
       height: "100%",
-    }}
-    animate={{
-      x: [0, -720],
-    }}
-    transition={{
-      duration,
-      repeat: Infinity,
-      ease: "linear",
-      delay,
+      overflow: "hidden",
+      opacity,
+      pointerEvents: "none",
     }}
   >
-    <path
-      fill="#F5E6D3"
-      d="
-        M0,224
-        C120,192 240,160 360,170
-        C480,180 600,240 720,245
-        C840,250 960,200 1080,186
-        C1200,172 1320,194 1440,218
-        L1440,320
-        L0,320
-        Z
-      "
-    />
-  </MotionSvg>
+    <svg
+      viewBox="0 0 1440 320"
+      preserveAspectRatio="none"
+      style={{
+        position: "absolute",
+        bottom: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+        display: "block",
+      }}
+    >
+      <motion.path
+        fill="#fff8ee"
+        d="
+          M0,250
+          C120,230 240,270 360,250
+          C480,230 600,270 720,250
+          C840,230 960,270 1080,250
+          C1200,230 1320,270 1440,250
+          L1440,320 L0,320 Z
+        "
+        animate={{
+          pathLength: [1, 1], // 👈 trava qualquer interpolação estranha
+          x: [0, 0], // 👈 garante que nunca anda pro lado
+        }}
+        transition={{
+          duration,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+    </svg>
+  </motion.div>
 )
 
 export const Container = ({
@@ -177,7 +183,8 @@ export const Container = ({
         </MotionBox>
 
         <Box sx={waveContainerSx}>
-          <Wave delay={0} duration={18} />
+          <Wave duration={6} opacity={1} offset={0} />
+          <Wave duration={8} opacity={0.35} offset={1} />
         </Box>
       </Box>
 
