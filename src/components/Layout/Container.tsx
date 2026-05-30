@@ -20,7 +20,6 @@ import { Header } from "../Header/Header"
 import { Button } from "../Button/Button"
 
 const MotionBox = motion.create(Box)
-const MotionSvg = motion.create("svg")
 
 const navegacaoPrincipal = [
   { label: "Início", to: "/" },
@@ -29,11 +28,11 @@ const navegacaoPrincipal = [
   { label: "Galeria", to: "/galeria" },
 ]
 
-const Wave = ({ duration = 8, opacity = 1, offset = 0 }: any) => (
+const Wave = ({ duration = 8, opacity = 1 }: { duration?: number; opacity?: number }) => (
   <motion.div
     style={{
       position: "absolute",
-      bottom: -1, // 👈 mata a linha feia
+      bottom: -1, // mata a linha feia
       left: 0,
       width: "100%",
       height: "100%",
@@ -183,8 +182,8 @@ export const Container = ({
         </MotionBox>
 
         <Box sx={waveContainerSx}>
-          <Wave duration={6} opacity={1} offset={0} />
-          <Wave duration={8} opacity={0.35} offset={1} />
+          <Wave duration={6} opacity={1} />
+          <Wave duration={8} opacity={0.35} />
         </Box>
       </Box>
 

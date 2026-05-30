@@ -1,9 +1,8 @@
 import { Button } from "@/components/Button/Button"
 import CardInfo from "@/components/cardInfo/CardInfo"
 import { Dashboard } from "@/components/Dashboard/Dashboard"
-import { SocialContactBar } from "@/components/SocialContact/SocialContact"
-import { Box, Container, Grid, Stack, Typography } from "@mui/material"
-import { Book, Clock, Heart, Waves } from "lucide-react"
+import { Container, Grid, Stack, Typography } from "@mui/material"
+import { Book, Clock, Heart } from "lucide-react"
 
 export const Home = () => {
 
@@ -26,21 +25,6 @@ export const Home = () => {
           maxWidth: 820,
         }}
       >
-        {/* <SocialContactBar /> */}
-        {/* <Box
-          sx={{
-            width: 72,
-            height: 72,
-            borderRadius: "50%",
-            display: "grid",
-            placeItems: "center",
-            background: "linear-gradient(135deg, rgba(45, 108, 223, 0.16), rgba(24, 75, 155, 0.16))",
-            color: "primary.main",
-          }}
-        >
-          <Waves size={34} />
-        </Box> */}
-
         <Typography variant="h2" sx={{ fontSize: { xs: "3.2rem", md: "4.8rem" }}}>
           Sinta a liberdade das ondas
         </Typography>
