@@ -111,7 +111,7 @@ export const ReservaWizard: React.FC<ReservaWizardProps> = ({
           transform: "translate(-50%, -50%)",
           width: { xs: "92%", sm: 560 },
           bgcolor: "#fff",
-          borderRadius: 4,
+          borderRadius: 2,
           boxShadow: "0 24px 48px rgba(0,0,0,0.18)",
           p: { xs: 3, sm: 4 },
         }}
@@ -190,7 +190,7 @@ export const ReservaWizard: React.FC<ReservaWizardProps> = ({
                       }}
                       sx={{
                         flex: 1,
-                        borderRadius: 3,
+                        borderRadius: 1,
                         border: "1px solid",
                         borderColor: isSelected ? "#4c7cf0" : "#d8e3f4",
                         backgroundColor: isSelected ? "#e7f0ff" : "#fff",
@@ -215,7 +215,7 @@ export const ReservaWizard: React.FC<ReservaWizardProps> = ({
 
               <Box
                 sx={{
-                  borderRadius: 3,
+                  borderRadius: 1,
                   backgroundColor: "#e7f4f6",
                   p: 2,
                 }}
@@ -287,7 +287,7 @@ export const ReservaWizard: React.FC<ReservaWizardProps> = ({
               <Stack spacing={2}>
                 <Box
                   sx={{
-                    borderRadius: 3,
+                    borderRadius: 2,
                     backgroundColor: "#e7f4f6",
                     p: 2,
                   }}
@@ -318,7 +318,7 @@ export const ReservaWizard: React.FC<ReservaWizardProps> = ({
 
                 <Box
                   sx={{
-                    borderRadius: 3,
+                    borderRadius: 2,
                     backgroundColor: "#e7f4f6",
                     p: 2,
                   }}
@@ -339,7 +339,7 @@ export const ReservaWizard: React.FC<ReservaWizardProps> = ({
 
                 <Box
                   sx={{
-                    borderRadius: 3,
+                    borderRadius: 2,
                     backgroundColor: "#e7f4f6",
                     p: 2,
                   }}
@@ -357,11 +357,11 @@ export const ReservaWizard: React.FC<ReservaWizardProps> = ({
 
           {step === 4 && (
             <Stack spacing={2} sx={{ alignItems: "center" }}>
-              <Typography variant="h6" sx={{ fontWeight: 700 }}>
+              <Typography variant="h3" sx={{ fontWeight: 700 }}>
                 Reserva confirmada!
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                Voce recebera um email com mais detalhes
+                Você receberá um email com mais detalhes
               </Typography>
             </Stack>
           )}
@@ -371,7 +371,7 @@ export const ReservaWizard: React.FC<ReservaWizardProps> = ({
           <Stack
             direction={{ xs: "column", sm: "row" }}
             spacing={2}
-            sx={{ justifyContent: "space-between" }}
+            sx={{ justifyContent: "center" }}
           >
             {step < 4 && (
               <Button
