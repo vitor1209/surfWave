@@ -79,9 +79,14 @@ export const ReservaAluguel = () => {
             }}
           >
             <Box
-              sx={{
-                backgroundColor: "#d9d9d9",
-                height: 240,
+                component="img"
+                src={equipment.image}
+                alt={equipment.name}
+                sx={{
+                  width: "100%",
+                  height: 240,
+                  objectFit: "cover",
+              
               }}
             />
 

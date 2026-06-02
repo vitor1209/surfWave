@@ -1,5 +1,7 @@
+import { useState } from "react"
 import { faker } from "@faker-js/faker"
-import { Box, Typography } from "@mui/material"
+import { Box, Typography, Modal, IconButton } from "@mui/material"
+import { X, ChevronLeft, ChevronRight } from "lucide-react"
 import type { GalleryItem } from "./Galeria.types"
 
 faker.seed(28)
@@ -18,9 +20,6 @@ const layouts = [
   { colSpan: 1, rowSpan: 2 },
   { colSpan: 1, rowSpan: 2 },
   { colSpan: 1, rowSpan: 2 },
-
-
-
 ]
 
 const captions = [
@@ -68,85 +67,200 @@ const galleryItems: GalleryItem[] = layouts.map((layout, index) => {
     rowSpan: layout.rowSpan,
   }
 })
+
 export const Galeria = () => {
+  const [selected, setSelected] = useState<number | null>(null)
+
+  const handleOpen = (index: number) => setSelected(index)
+  const handleClose = () => setSelected(null)
+  const handlePrev = () =>
+    setSelected((i) => (i! - 1 + galleryItems.length) % galleryItems.length)
+  const handleNext = () =>
+    setSelected((i) => (i! + 1) % galleryItems.length)
+
+  const active = selected !== null ? galleryItems[selected] : null
+
   return (
-    <Box sx={{ width: "100%", maxWidth: 1180, mx: "auto" }}>
-      <Box
-        sx={{
-          display: "grid",
-          gridTemplateColumns: {
-            xs: "1fr",
-            sm: "repeat(2, minmax(0, 1fr))",
-            md: "repeat(3, minmax(0, 1fr))",
-          },
-          gridAutoRows: {
-            xs: 190,
-            sm: 170,
-            md: 180,
-          },
-          gap: { xs: 2.5, sm: 3 },
-        }}
-      >
-        {galleryItems.map((item) => (
-          <Box
-            key={item.id}
-            component="article"
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              gap: 1.5,
-              gridColumnEnd: {
-                xs: "span 1",
-                sm: "span 1",
-                md: `span ${item.colSpan}`,
-              },
-              gridRowEnd: {
-                xs: "span 2",
-                sm: `span ${Math.max(2, item.rowSpan - 1)}`,
-                md: `span ${item.rowSpan}`,
-              },
-            }}
-          >
+    <>
+      <Box sx={{ width: "100%", maxWidth: 1180, mx: "auto" }}>
+        <Box
+          sx={{
+            display: "grid",
+            gridTemplateColumns: {
+              xs: "1fr",
+              sm: "repeat(2, minmax(0, 1fr))",
+              md: "repeat(3, minmax(0, 1fr))",
+            },
+            gridAutoRows: {
+              xs: 190,
+              sm: 170,
+              md: 180,
+            },
+            gap: { xs: 2.5, sm: 3 },
+          }}
+        >
+          {galleryItems.map((item, index) => (
             <Box
+              key={item.id}
+              component="article"
+              onClick={() => handleOpen(index)}
               sx={{
-                position: "relative",
-                overflow: "hidden",
-                borderRadius: 2,
-                backgroundColor: "rgba(0, 0, 0, 0.08)",
-                flex: 1,
-                minHeight: 0,
-                boxShadow: "0 10px 25px rgba(0, 0, 0, 0.12)",
-                transition: "transform 0.4s ease",
-                "&:hover": {
-                  transform: "scale(1.02)",
-                }
+                display: "flex",
+                flexDirection: "column",
+                gap: 1.5,
+                cursor: "pointer",
+                gridColumnEnd: {
+                  xs: "span 1",
+                  sm: "span 1",
+                  md: `span ${item.colSpan}`,
+                },
+                gridRowEnd: {
+                  xs: "span 2",
+                  sm: `span ${Math.max(2, item.rowSpan - 1)}`,
+                  md: `span ${item.rowSpan}`,
+                },
               }}
             >
               <Box
-                component="img"
-                src={item.src}
-                alt={`Foto de ${item.location}`}
                 sx={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  display: "block",
-
+                  position: "relative",
+                  overflow: "hidden",
+                  borderRadius: 2,
+                  backgroundColor: "rgba(0, 0, 0, 0.08)",
+                  flex: 1,
+                  minHeight: 0,
+                  boxShadow: "0 10px 25px rgba(0, 0, 0, 0.12)",
+                  transition: "transform 0.4s ease",
+                  "&:hover": {
+                    transform: "scale(1.02)",
+                  },
                 }}
-              />
-            </Box>
+              >
+                <Box
+                  component="img"
+                  src={item.src}
+                  alt={`Foto de ${item.location}`}
+                  sx={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    display: "block",
+                  }}
+                />
+              </Box>
 
-            <Box sx={{ px: 0.5 }}>
-              <Typography variant="caption" color="text.secondary" component="p">
-                {item.location}
+              <Box sx={{ px: 0.5 }}>
+                <Typography variant="caption" color="text.secondary" component="p">
+                  {item.location}
+                </Typography>
+                <Typography variant="body2" component="p">
+                  {item.description}
+                </Typography>
+              </Box>
+            </Box>
+          ))}
+        </Box>
+      </Box>
+
+      <Modal open={!!active} onClose={handleClose}>
+        <Box
+          onClick={handleClose}
+          sx={{
+            position: "absolute",
+            inset: 0,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            p: { xs: 2, md: 6 },
+            backgroundColor: "rgba(0,0,0,0.88)",
+          }}
+        >
+          <Box
+            onClick={(e) => e.stopPropagation()}
+            sx={{ position: "relative", maxWidth: 900, width: "100%" }}
+          >
+            {/* Fechar */}
+            <IconButton
+              onClick={handleClose}
+              sx={{
+                position: "absolute",
+                top: -48,
+                right: 0,
+                color: "#fff",
+                "&:hover": { backgroundColor: "rgba(255,255,255,0.1)" },
+              }}
+            >
+              <X />
+            </IconButton>
+
+            {/* Anterior */}
+            <IconButton
+              onClick={handlePrev}
+              sx={{
+                position: "absolute",
+                left: { xs: 8, md: -56 },
+                top: "50%",
+                transform: "translateY(-50%)",
+                color: "#fff",
+                backgroundColor: "rgba(255,255,255,0.1)",
+                "&:hover": { backgroundColor: "rgba(255,255,255,0.2)" },
+                zIndex: 1,
+              }}
+            >
+              <ChevronLeft size={28} />
+            </IconButton>
+
+            {/* Próxima */}
+            <IconButton
+              onClick={handleNext}
+              sx={{
+                position: "absolute",
+                right: { xs: 8, md: -56 },
+                top: "50%",
+                transform: "translateY(-50%)",
+                color: "#fff",
+                backgroundColor: "rgba(255,255,255,0.1)",
+                "&:hover": { backgroundColor: "rgba(255,255,255,0.2)" },
+                zIndex: 1,
+              }}
+            >
+              <ChevronRight size={28} />
+            </IconButton>
+
+            {/* Imagem */}
+            <Box
+              component="img"
+              src={active?.src}
+              alt={active?.description}
+              sx={{
+                width: "100%",
+                maxHeight: "72vh",
+                objectFit: "contain",
+                borderRadius: 2,
+                display: "block",
+              }}
+            />
+
+            {/* Legenda */}
+            <Box sx={{ mt: 2, px: 0.5 }}>
+              <Typography
+                variant="caption"
+                component="p"
+                sx={{ color: "rgba(255,255,255,0.5)" }}
+              >
+                {active?.location}
               </Typography>
-              <Typography variant="body2" component="p">
-                {item.description}
+              <Typography
+                variant="body1"
+                component="p"
+                sx={{ color: "#fff", fontWeight: 500 }}
+              >
+                {active?.description}
               </Typography>
             </Box>
           </Box>
-        ))}
-      </Box>
-    </Box>
+        </Box>
+      </Modal>
+    </>
   )
 }

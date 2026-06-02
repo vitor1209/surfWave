@@ -24,9 +24,9 @@ const imagensEquipamentos = {
   ],
 
   acessorios: [
-    "/images/acessorio1.jpg",
-    "/images/acessorio2.jpg",
-    "/images/acessorio3.jpg",
+    "/images/acessorios1.jpg",
+    "/images/acessorios2.jpg",
+    "/images/acessorios3.jpg",
   ],
   praia: [
   "/images/praia1.jpg",
@@ -51,7 +51,7 @@ const nomesEquipamentos = {
   acessorios: [
     "Capa da Prancha",
     "Lycra UV Protection",
-    "Prancha Soft Top Iniciante",
+    "Leash Premium 6'",
   ],
   praia: [
   "Guarda-sol Premium",
@@ -97,7 +97,7 @@ const itensInclusos = [
 
 const condicoesLocacao = [
   "Documento com foto necessário",
-  "Caucao de R$ 200 (devolvido na entrega)",
+  "Caução de R$ 200 (devolvido na entrega)",
   "Devolução até as 18h do último dia",
   "Retirada mediante assinatura",
   "Atraso sujeito a taxa adicional",

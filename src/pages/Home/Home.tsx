@@ -3,6 +3,7 @@ import CardInfo from "@/components/cardInfo/CardInfo"
 import { Dashboard } from "@/components/Dashboard/Dashboard"
 import { Container, Grid, Stack, Typography } from "@mui/material"
 import { Book, Clock, Heart } from "lucide-react"
+import Flutuanteicon from "@/components/Icone/Icone"
 
 export const Home = () => {
 
@@ -25,6 +26,7 @@ export const Home = () => {
           maxWidth: 820,
         }}
       >
+        <Flutuanteicon />
         <Typography variant="h2" sx={{ fontSize: { xs: "3.2rem", md: "4.8rem" }}}>
           Sinta a liberdade das ondas
         </Typography>
