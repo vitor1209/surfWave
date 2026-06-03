@@ -19,7 +19,7 @@ export const LEVELS_DATA: LevelData[] = [
   },
 
   {
-    id: "Intermediário",
+    id: "intermediario",
     title: "Intermediário",
     subtitle: "Evolução",
     price: 200,
