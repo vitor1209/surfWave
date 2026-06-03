@@ -1,21 +1,21 @@
 export const DELIVERY_FEE = 25
 
 export const STORE_ADDRESS = {
-  title: "Endereco da loja",
+  title: "Endereço da loja",
   line1: "Rua Beira Mar, 1234 - Praia Boas Ondas",
-  line2: "Seg a Dom, 7h as 18h",
+  line2: "Seg à Dom, 7h as 18h",
 }
 
 export const DELIVERY_OPTIONS = [
   {
     value: "retirar",
     title: "Retirar na loja",
-    description: "Gratis - retire seu equipamento em nossa loja",
+    description: "Grátis - retire seu equipamento em nossa loja",
   },
   {
     value: "delivery",
     title: "Delivery",
-    description: "R$ 25,00 - Entregamos na praia ou no endereco",
+    description: "R$ 25,00 - Entregamos na praia ou no endereço",
   },
 ] as const
 
@@ -24,7 +24,7 @@ export const PAYMENT_OPTIONS = [
     value: "retirada",
     title: "Pagamento na retirada",
     description:
-      "O pagamento sera realizado no momento da retirada ou entrega. Aceitamos Pix, cartao e dinheiro.",
+      "O pagamento será realizado no momento da retirada ou entrega. Aceitamos Pix, cartão e dinheiro.",
   },
 ] as const
 
