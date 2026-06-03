@@ -348,7 +348,10 @@ export function FormAula({ className }: LessonsScheduleProps) {
                                         control={control}
                                         rules={{
                                             required: "Telefone obrigatório",
-                                            pattern: { value: /^\(\d{2}\) \d{5}-\d{4}$/, message: "Telefone inválido" },
+                                            pattern: {
+                                              value: /^\d{10,11}$/,
+                                              message: "Telefone inválido",
+                                            },
                                         }}
                                         render={({ field, fieldState }) => (
                                             <>
