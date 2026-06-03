@@ -289,7 +289,7 @@ export const ReservaWizard: React.FC<ReservaWizardProps> = ({
                   render={({ field, fieldState }) => (
                     <TextField
                       {...field}
-                      label="Observacoes"
+                      label="Observações"
                       placeholder="Escreva se precisar"
                       error={Boolean(fieldState.error)}
                       helperText={fieldState.error?.message}
