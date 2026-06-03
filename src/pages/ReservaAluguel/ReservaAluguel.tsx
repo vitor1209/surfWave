@@ -222,7 +222,7 @@ export const ReservaAluguel = () => {
               <Info size={18} />
             </Box>
             <Typography variant="h6" sx={{ fontWeight: 700, fontFamily: '"Raleway", sans-serif', }}>
-              Condicoes do aluguel
+              Condições do aluguel
             </Typography>
           </Stack>
 
