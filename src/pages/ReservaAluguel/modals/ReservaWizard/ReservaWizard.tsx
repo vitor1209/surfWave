@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm, useWatch } from "react-hook-form"
+import { Controller, useForm, useWatch } from "react-hook-form"
 
 import { Button } from "@/components/Button/Button"
 
@@ -43,13 +43,11 @@ export const ReservaWizard: React.FC<ReservaWizardProps> = ({
   const [step, setStep] = useState<ReservaWizardStep>(1)
 
   const {
-    register,
     handleSubmit,
     reset,
     setValue,
     control,
     trigger,
-    formState: { errors },
   } = useForm<ReservaWizardFormValues>({
     resolver: zodResolver(reservaWizardSchema),
     defaultValues: DEFAULT_VALUES,
@@ -240,39 +238,66 @@ export const ReservaWizard: React.FC<ReservaWizardProps> = ({
               </Typography>
 
               <Stack spacing={2}>
-                <TextField
-                  label="Nome completo"
-                  placeholder="Seu nome"
-                  {...register("fullName")}
-                  error={Boolean(errors.fullName)}
-                  helperText={errors.fullName?.message}
-                  fullWidth
+                <Controller
+                  name="fullName"
+                  control={control}
+                  render={({ field, fieldState }) => (
+                    <TextField
+                      {...field}
+                      label="Nome completo"
+                      placeholder="Seu nome"
+                      error={Boolean(fieldState.error)}
+                      helperText={fieldState.error?.message}
+                      fullWidth
+                      required
+                    />
+                  )}
                 />
-                <TextField
-                  label="Telefone/Whatsapp"
-                  placeholder="(00) 00000-0000"
-                  {...register("phone")}
-                  error={Boolean(errors.phone)}
-                  helperText={errors.phone?.message}
-                  fullWidth
+                <Controller
+                  name="phone"
+                  control={control}
+                  render={({ field, fieldState }) => (
+                    <TextField
+                      {...field}
+                      label="Telefone/Whatsapp"
+                      placeholder="(00) 00000-0000"
+                      error={Boolean(fieldState.error)}
+                      helperText={fieldState.error?.message}
+                      fullWidth
+                      required
+                    />
+                  )}
                 />
-                <TextField
-                  label="Email"
-                  placeholder="nome@email.com"
-                  {...register("email")}
-                  error={Boolean(errors.email)}
-                  helperText={errors.email?.message}
-                  fullWidth
+                <Controller
+                  name="email"
+                  control={control}
+                  render={({ field, fieldState }) => (
+                    <TextField
+                      {...field}
+                      label="Email"
+                      placeholder="nome@email.com"
+                      error={Boolean(fieldState.error)}
+                      helperText={fieldState.error?.message}
+                      fullWidth
+                      required
+                    />
+                  )}
                 />
-                <TextField
-                  label="Observacoes"
-                  placeholder="Escreva se precisar"
-                  {...register("notes")}
-                  error={Boolean(errors.notes)}
-                  helperText={errors.notes?.message}
-                  fullWidth
-                  multiline
-                  minRows={2}
+                <Controller
+                  name="notes"
+                  control={control}
+                  render={({ field, fieldState }) => (
+                    <TextField
+                      {...field}
+                      label="Observacoes"
+                      placeholder="Escreva se precisar"
+                      error={Boolean(fieldState.error)}
+                      helperText={fieldState.error?.message}
+                      fullWidth
+                      multiline
+                      minRows={2}
+                    />
+                  )}
                 />
               </Stack>
             </Stack>

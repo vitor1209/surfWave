@@ -35,7 +35,7 @@ export const Home = () => {
           Venha descobrir a magia do surf. Das primeiras remadas ao primeiro tubo, estamos aqui para guiar sua jornada com aulas, aluguel e experiências na praia.
         </Typography>
 
-        <Button tamanho="lg" espacamento={24} icon={Book}>
+        <Button tamanho="lg" espacamento={24} icon={Book} href="/aulas" >
           Comece agora
         </Button>
       </Stack>

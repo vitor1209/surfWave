@@ -16,14 +16,10 @@ export const Aluguel = () => {
   const {
     busca,
     setBusca,
-
     categoriaAtiva,
     setCategoriaAtiva,
-
     equipamentosFiltrados,
-
     categories,
-
     handleReservar,
   } = useAluguel()
 

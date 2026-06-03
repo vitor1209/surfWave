@@ -1,6 +1,15 @@
 import type { ButtonProp } from "./Button.types"
+import type { ComponentProps } from "react"
 import { Link } from "react-router-dom"
 import * as Component from "./Button.styled"
+
+type RouterLinkAdapterProps = Omit<ComponentProps<typeof Link>, "to"> & {
+    href?: string
+}
+
+const RouterLinkAdapter = ({ href, ...props }: RouterLinkAdapterProps) => {
+    return <Link to={href ?? ""} {...props} />
+}
 
 export const Button = ({
     variante = "ButtonBlue",
@@ -11,6 +20,8 @@ export const Button = ({
     espacamento,
     icon: Icon,
     ladoIcon = "esquerda",
+    to,
+    href,
     ...props
 }: ButtonProp) => {
     const iconSizeMap = {
@@ -21,11 +32,13 @@ export const Button = ({
     }
 
     const iconSize = iconSizeMap[tamanho] || 20
+    const destination = to ?? href
 
     return (
         <Component.ButtonVariants
             disabled={disabled || loading}
-            LinkComponent={Link}
+            LinkComponent={destination ? RouterLinkAdapter : undefined}
+            href={destination}
             variante={variante}
             tamanho={tamanho}
             espacamento={espacamento || 0}

@@ -1,28 +1,35 @@
-"use client"
-
 import { useState } from "react"
-import { Stack, Typography } from "@mui/material"
+import { Stack, Typography, Modal, Box, Divider } from "@mui/material"
+import { useForm, Controller } from "react-hook-form"
 import { AnimatePresence, motion } from "framer-motion"
-
 import type { LessonsScheduleProps, LessonFormData } from "./FormAula.types"
-
 import { styles, weekDays, defaultLessonTypes } from "./FormAula.styles"
+import { Button } from "@/components/Button/Button"
 
 export function FormAula({ className }: LessonsScheduleProps) {
     const [selectedLesson, setSelectedLesson] = useState("iniciante")
     const [selectedDay, setSelectedDay] = useState(3)
     const [selectedTime, setSelectedTime] = useState<string | null>(null)
+    const [confirmOpen, setConfirmOpen] = useState(false)
+    const [_, setSubmittedData] = useState<LessonFormData | null>(null)
 
-    const [formData, setFormData] = useState<LessonFormData>({
-        name: "",
-        email: "",
-        phone: "",
-        experience: "",
+    const { control, handleSubmit } = useForm<LessonFormData>({
+        defaultValues: {
+            name: "",
+            email: "",
+            phone: "",
+            experience: "",
+        },
     })
 
     const currentLesson = defaultLessonTypes.find(
         (l) => l.id === selectedLesson
     )!
+
+    const onSubmit = (data: LessonFormData) => {
+        setSubmittedData(data)
+        setConfirmOpen(true)
+    }
 
     return (
         <section
@@ -36,13 +43,11 @@ export function FormAula({ className }: LessonsScheduleProps) {
                     mx: "auto",
                 }}
             >
-                {/* CONTEUDO */}
                 <Stack
                     direction={{ xs: "column", lg: "row" }}
                     spacing={4}
                     alignItems="flex-start"
                 >
-                    {/* ESQUERDA */}
                     <Stack spacing={3} sx={{ flex: 1 }}>
                         <Typography
                             sx={{
@@ -117,7 +122,6 @@ export function FormAula({ className }: LessonsScheduleProps) {
                                     {lesson.description}
                                 </Typography>
 
-                                {/* ANIMAÇÃO CORRIGIDA */}
                                 <AnimatePresence>
                                     {selectedLesson === lesson.id && (
                                         <motion.div
@@ -178,7 +182,6 @@ export function FormAula({ className }: LessonsScheduleProps) {
                         ))}
                     </Stack>
 
-                    {/* DIREITA (100% RESTAURADA) */}
                     <Stack
                         spacing={4}
                         sx={{
@@ -201,7 +204,6 @@ export function FormAula({ className }: LessonsScheduleProps) {
                             Agende sua Aula
                         </Typography>
 
-                        {/* DIAS */}
                         <Stack spacing={2}>
                             <Typography sx={{ fontWeight: 600 }}>
                                 Escolha o dia
@@ -235,7 +237,6 @@ export function FormAula({ className }: LessonsScheduleProps) {
                             </Stack>
                         </Stack>
 
-                        {/* HORÁRIOS */}
                         <Stack spacing={2}>
                             <Typography sx={{ fontWeight: 600 }}>
                                 Horários disponíveis
@@ -269,106 +270,114 @@ export function FormAula({ className }: LessonsScheduleProps) {
                             </Stack>
                         </Stack>
 
-                        {/* INPUTS */}
                         <Stack spacing={3}>
                             <Stack spacing={1}>
                                 <Typography sx={{ fontWeight: 600 }}>
-                                    Nome completo
+                                    Nome completo <span style={{ color: "#d32f2f" }}>*</span>
                                 </Typography>
 
-                                <Stack
-                                    component="input"
-                                    value={formData.name}
-                                    onChange={(e) =>
-                                        setFormData({
-                                            ...formData,
-                                            name: e.target.value,
-                                        })
-                                    }
-                                    placeholder="Seu nome"
-                                    sx={{
-                                        px: 2,
-                                        py: 2,
-                                        borderRadius: "14px",
-                                        border: "none",
-                                        background:
-                                            styles.bookingForm.input.background,
-                                    }}
+                                <Controller
+                                    name="name"
+                                    control={control}
+                                    rules={{ required: "Nome obrigatório" }}
+                                    render={({ field, fieldState }) => (
+                                        <>
+                                            <Stack
+                                                component="input"
+                                                {...field}
+                                                placeholder="Seu nome"
+                                                sx={{
+                                                    px: 2,
+                                                    py: 2,
+                                                    borderRadius: "14px",
+                                                    border: "none",
+                                                    background:
+                                                        styles.bookingForm.input.background,
+                                                }}
+                                            />
+                                            <Typography variant="caption" color="error" sx={{ minHeight: 18 }}>
+                                                {fieldState.error?.message || " "}
+                                            </Typography>
+                                        </>
+                                    )}
                                 />
                             </Stack>
 
                             <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
                                 <Stack spacing={1} sx={{ flex: 1 }}>
                                     <Typography sx={{ fontWeight: 600 }}>
-                                        E-mail
+                                        E-mail <span style={{ color: "#d32f2f" }}>*</span>
                                     </Typography>
 
-                                    <Stack
-                                        component="input"
-                                        value={formData.email}
-                                        onChange={(e) =>
-                                            setFormData({
-                                                ...formData,
-                                                email: e.target.value,
-                                            })
-                                        }
-                                        placeholder="seu@email.com"
-                                        sx={{
-                                            px: 2,
-                                            py: 2,
-                                            borderRadius: "14px",
-                                            border: "none",
-                                            background:
-                                                styles.bookingForm.input.background,
+                                    <Controller
+                                        name="email"
+                                        control={control}
+                                        rules={{
+                                            required: "E-mail obrigatório",
+                                            pattern: { value: /\S+@\S+\.\S+/, message: "E-mail inválido" },
                                         }}
+                                        render={({ field, fieldState }) => (
+                                            <>
+                                                <Stack
+                                                    component="input"
+                                                    {...field}
+                                                    placeholder="seu@email.com"
+                                                    sx={{
+                                                        px: 2,
+                                                        py: 2,
+                                                        borderRadius: "14px",
+                                                        border: "none",
+                                                        background:
+                                                            styles.bookingForm.input.background,
+                                                    }}
+                                                />
+                                                <Typography variant="caption" color="error" sx={{ minHeight: 18 }}>
+                                                    {fieldState.error?.message || " "}
+                                                </Typography>
+                                            </>
+                                        )}
                                     />
                                 </Stack>
 
                                 <Stack spacing={1} sx={{ flex: 1 }}>
                                     <Typography sx={{ fontWeight: 600 }}>
-                                        Telefone
+                                        Telefone <span style={{ color: "#d32f2f" }}>*</span>
                                     </Typography>
-
-                                    <Stack
-                                        component="input"
-                                        value={formData.phone}
-                                        onChange={(e) =>
-                                            setFormData({
-                                                ...formData,
-                                                phone: e.target.value,
-                                            })
-                                        }
-                                        placeholder="(00) 00000-0000"
-                                        sx={{
-                                            px: 2,
-                                            py: 2,
-                                            borderRadius: "14px",
-                                            border: "none",
-                                            background:
-                                                styles.bookingForm.input.background,
+                                    <Controller
+                                        name="phone"
+                                        control={control}
+                                        rules={{
+                                            required: "Telefone obrigatório",
+                                            pattern: { value: /^\(\d{2}\) \d{5}-\d{4}$/, message: "Telefone inválido" },
                                         }}
+                                        render={({ field, fieldState }) => (
+                                            <>
+                                                <Stack
+                                                    component="input"
+                                                    {...field}
+                                                    placeholder="(00) 00000-0000"
+                                                    sx={{
+                                                        px: 2,
+                                                        py: 2,
+                                                        borderRadius: "14px",
+                                                        border: "none",
+                                                        background:
+                                                            styles.bookingForm.input.background,
+                                                    }}
+                                                />
+                                                <Typography variant="caption" color="error" sx={{ minHeight: 18 }}>
+                                                    {fieldState.error?.message || " "}
+                                                </Typography>
+                                            </>
+                                        )}
                                     />
                                 </Stack>
                             </Stack>
                         </Stack>
 
-                        {/* BOTÃO */}
-                        <Stack
-                            component="button"
-                            sx={{
-                                py: 2,
-                                borderRadius: "16px",
-                                border: "none",
-                                cursor: "pointer",
-                                fontSize: "1rem",
-                                fontWeight: 700,
-                                background: currentLesson.color,
-                                color: "white",
-                                boxShadow: `0 8px 25px ${currentLesson.color}50`,
-                            }}
-                        >
+                        <Button tamanho="lg" onClick={handleSubmit(onSubmit)}>
                             Confirmar Agendamento
-                        </Stack>
+                        </Button>
 
                         <Typography
                             sx={{
@@ -380,6 +389,56 @@ export function FormAula({ className }: LessonsScheduleProps) {
                         >
                             Você receberá a confirmação por e-mail e WhatsApp
                         </Typography>
+                        <Modal
+                            open={confirmOpen}
+                            onClose={() => setConfirmOpen(false)}
+                            sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+                        >
+                            <Box
+                                sx={{
+                                    p: 3,
+                                    borderRadius: "16px",
+                                    background: "white",
+                                    maxWidth: 400,
+                                    width: "90%",
+                                    boxShadow: "0 8px 32px rgba(0, 0, 0, 0.1)",
+                                }}
+                            >
+                                <Stack spacing={2} sx={{ alignItems: "center" }}>
+                                    <Typography variant="h3" sx={{ fontWeight: 700 }}>
+                                        Reserva confirmada!
+                                    </Typography>
+                                    <Typography variant="body2" color="text.secondary">
+                                        Você receberá um email com mais detalhes
+                                    </Typography>
+                                </Stack>
+
+                                <Divider sx={{ my: 4 }} />
+
+                                <Stack
+                                    direction={{ xs: "column", sm: "row" }}
+                                    spacing={4}
+                                    sx={{ justifyContent: "center" }}
+                                >
+                                    <Button
+                                        onClick={() => setConfirmOpen(false)}
+                                        variante="ButtonLinkWhite"
+                                        tamanho="md"
+                                        sx={{
+                                            borderRadius: "14px",
+                                            px: 5,
+                                            py: 1.2,
+                                            textTransform: "none",
+                                            fontWeight: 700,
+                                            border: "1px solid #cbd7f0",
+                                            color: "#395587",
+                                        }}
+                                    >
+                                        Voltar
+                                    </Button>
+                                </Stack>
+                            </Box>
+                        </Modal>
                     </Stack>
                 </Stack>
             </Stack>

@@ -5,6 +5,8 @@ export const ButtonVariants = styled(ButtonBase, {
 })<{
     tamanho: "sm" | "md" | "lg" | "xl"
     espacamento: number
+    to?: string
+    href?: string
     variante:
         | "ButtonBlue"
         | "ButtonLinkBlack"

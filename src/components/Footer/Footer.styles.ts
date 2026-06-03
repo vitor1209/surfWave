@@ -100,6 +100,7 @@ export const socialButtonSx: SxProps<Theme> = {
   height: { xs: "40px", sm: "44px", md: "48px" },
   borderRadius: "50%",
   background: "linear-gradient(135deg, #2D6CDF 0%, #184B9B 100%)",
+  color: "#FFFFFF",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
