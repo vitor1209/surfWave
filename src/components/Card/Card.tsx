@@ -113,18 +113,13 @@ export default function ProductCard({
                             {String(lugar).toUpperCase()}
                         </Typography>
 
-                        <Link
+                        <Typography
                             className="productTitle"
-                            href={
-                                tipoCard === "semLogin"
-                                    ? "/Login"
-                                    : `/Produto/${id}`
-                            }
+           
                             color="neutral"
-                            underline="none"
                         >
                             {name}
-                        </Link>
+                        </Typography>
 
                         {descricao && (
                             <Typography className="productDescription" level="body-sm">

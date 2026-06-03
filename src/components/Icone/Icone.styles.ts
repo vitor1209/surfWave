@@ -1,3 +1,5 @@
+/* This TypeScript code snippet is defining style objects using the `SxProps` type from the Material-UI
+library. Here's a breakdown of what each part of the code is doing: */
 import type { SxProps } from "@mui/system"
 import type { Theme } from "@mui/material/styles"
 
@@ -47,6 +49,6 @@ export const modalContent: SxProps<Theme> = {
   borderRadius: 3,
   p: 3,
   width: "100%",
-  maxWidth: 480,
+  maxWidth: 660,
   position: "relative",
 }
