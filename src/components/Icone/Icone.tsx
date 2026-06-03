@@ -12,7 +12,7 @@ import {
 
 import { CONTACT_INFO } from "./Icone.constants"
 
-export default function Flutuanteicon(){
+export default function Flutuanteicon() {
 
   const [modalOpen, setModalOpen] = useState(false)
 
@@ -25,8 +25,8 @@ export default function Flutuanteicon(){
           }
           sx={floatingButton("#25D366")}
         >
-<FaWhatsapp size={22} color="white" />
-          </Box>
+          <FaWhatsapp size={22} color="white" />
+        </Box>
 
         <Box
           onClick={() =>
@@ -39,8 +39,8 @@ export default function Flutuanteicon(){
             "linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)"
           )}
         >
-<FaInstagram size={22} color="white" />
-          </Box>
+          <FaInstagram size={22} color="white" />
+        </Box>
 
         <Box
           onClick={() => setModalOpen(true)}
@@ -98,12 +98,34 @@ export default function Flutuanteicon(){
             </Box>
 
             {/* restante do modal */}
+            <Box
+              sx={{
+                width: "100%",
+                height: 300,
+                borderRadius: 3,
+                overflow: "hidden",
+                mb: 3,
+              }}
+            >
+              <iframe
+                title="Google Maps"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                loading="lazy"
+                allowFullScreen
+                src="https://www.google.com/maps?q=-27.5949,-48.5482&z=15&output=embed"
+              />
+            </Box>
 
             <Box
               sx={{
                 display: "grid",
                 gridTemplateColumns: "repeat(3, 1fr)",
                 gap: 2,
+
+                alignItems: "start",
+
               }}
             >
               {CONTACT_INFO.map(
@@ -113,6 +135,8 @@ export default function Flutuanteicon(){
                     sx={{
                       display: "flex",
                       gap: 1,
+
+                      alignItems: "flex-start"
                     }}
                   >
                     {icon}

@@ -18,6 +18,7 @@ import type { ContainerProps } from "@/components/Layout/Container.types"
 
 import { Header } from "../Header/Header"
 import { Button } from "../Button/Button"
+import { useEffect, useRef } from "react"
 
 const MotionBox = motion.create(Box)
 
@@ -28,54 +29,54 @@ const navegacaoPrincipal = [
   { label: "Galeria", to: "/galeria" },
 ]
 
-const Wave = ({ duration = 8, opacity = 1 }: { duration?: number; opacity?: number }) => (
-  <motion.div
-    style={{
-      position: "absolute",
-      bottom: -1, // mata a linha feia
-      left: 0,
-      width: "100%",
-      height: "100%",
-      overflow: "hidden",
-      opacity,
-      pointerEvents: "none",
-    }}
-  >
-    <svg
-      viewBox="0 0 1440 320"
-      preserveAspectRatio="none"
-      style={{
-        position: "absolute",
-        bottom: 0,
-        left: 0,
-        width: "100%",
-        height: "100%",
-        display: "block",
-      }}
-    >
-      <motion.path
-        fill="#fff8ee"
-        d="
-          M0,250
-          C120,230 240,270 360,250
-          C480,230 600,270 720,250
-          C840,230 960,270 1080,250
-          C1200,230 1320,270 1440,250
-          L1440,320 L0,320 Z
-        "
-        animate={{
-          pathLength: [1, 1], // 👈 trava qualquer interpolação estranha
-          x: [0, 0], // 👈 garante que nunca anda pro lado
-        }}
-        transition={{
-          duration,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
-    </svg>
-  </motion.div>
-)
+const Wave = ({ duration = 8, opacity = 1 }: { duration?: number; opacity?: number }) => {
+  const pathRef = useRef<SVGPathElement>(null)
+
+  // stateA — onda pra baixo
+const stateA = "M0,80 C180,20 360,160 540,80 C720,20 900,160 1080,80 C1260,20 1350,120 1440,80 L1440,320 L0,320 Z"
+
+// stateB — onda invertida
+const stateB = "M0,160 C180,220 360,80 540,160 C720,220 900,80 1080,160 C1260,220 1350,100 1440,160 L1440,320 L0,320 Z"
+
+
+  useEffect(() => {
+    const el = pathRef.current
+    if (!el) return
+
+    const parsePath = (d: string) => d.match(/-?\d+\.?\d*/g)!.map(Number)
+    const a = parsePath(stateA)
+    const b = parsePath(stateB)
+
+    const lerp = (x: number, y: number, t: number) => x + (y - x) * t
+    const ease = (t: number) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t
+
+    let frame: number
+    let t = 0
+
+    const buildPath = (nums: number[]) => {
+      let i = 0
+      return stateA.replace(/-?\d+\.?\d*/g, () => String(Math.round(nums[i++] * 10) / 10))
+    }
+
+    const animate = () => {
+      t += (1 / (duration * 60))
+      const p = ease((Math.sin(t * Math.PI) + 1) / 2)
+      el.setAttribute("d", buildPath(a.map((v, i) => lerp(v, b[i], p))))
+      frame = requestAnimationFrame(animate)
+    }
+
+    frame = requestAnimationFrame(animate)
+    return () => cancelAnimationFrame(frame)
+  }, [duration])
+
+  return (
+    <motion.div style={{ position: "absolute", bottom: -1, left: 0, width: "100%", height: "100%", overflow: "hidden", opacity, pointerEvents: "none" }}>
+      <svg viewBox="0 0 1440 320" preserveAspectRatio="none" style={{ position: "absolute", bottom: 0, left: 0, width: "100%", height: "100%", display: "block" }}>
+        <path ref={pathRef} fill="#fff8ee" d={stateA} />
+      </svg>
+    </motion.div>
+  )
+}
 
 export const Container = ({
   title,
@@ -182,8 +183,11 @@ export const Container = ({
         </MotionBox>
 
         <Box sx={waveContainerSx}>
-          <Wave duration={6} opacity={1} />
-          <Wave duration={8} opacity={0.35} />
+          <Wave duration={4} opacity={1} />
+          <Wave duration={3} opacity={0.6} />
+                    <Wave duration={2.5} opacity={0.35} />
+          <Wave duration={2} opacity={0.8} />
+
         </Box>
       </Box>
 
